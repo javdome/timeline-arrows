@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>Timeline | Group example, with an arrow</title>
-
+    <!-- Fuentes de iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
     <style>
       body,
       html {
@@ -32,6 +33,11 @@
       "vis/examples/timeline/groups/groups.html" but with multiple added arrows defined in the dependencies.
       The original discussion thread is https://github.com/almende/vis/issues/1699.
     </p>
+    <button onclick="showVisibleItems()">Show current visible items</button>
+    <div>
+      <h2>visible items:</h2>
+      <h3 id="visibleItemsContainer"></h3>
+    </div>
     <div id="visualization"></div>
 
     <script>
@@ -86,13 +92,27 @@
 
       const options = {
         groupOrder: "content", // groupOrder can be a property name or a sorting function
-		selectable: true,
-		editable: true,
+        selectable: true,
+        editable: true,
         onInitialDrawComplete: function() {
           drawDependencies(dependency);
           timelineplus.on("changed", () => {
             drawDependencies(dependency);
           }); //NOTE: We hijack the on "changed" event to draw the arrow.
+        },
+        groupTemplate: function(group) { //Con esto añadimos el boton de ocultar en los grupos
+          var container = document.createElement('div');
+          var label = document.createElement('span');
+          label.innerHTML = group.content + ' ';
+          container.insertAdjacentElement('afterBegin',label);
+          
+          var hide = document.createElement('span');
+          hide.setAttribute("class", "oi oi-eye");
+          hide.addEventListener('click',function(){
+            groups.update({id: group.id, visible: false});
+          });
+          container.insertAdjacentElement('beforeEnd',hide);     
+          return container;
         }
       };
 
@@ -177,6 +197,19 @@
         console.log("add somepath to dependencyPath", somePath);
         svg.appendChild(somePath);
       }
+
+
+
+
+
+      /*OTROS FUNCIONES SIN IMPOSTANCIA*/
+      function showVisibleItems() {
+        var a = timelineplus.getVisibleItems();
+        console.log(a);
+        document.getElementById("visibleItemsContainer").innerHTML = ""
+        document.getElementById("visibleItemsContainer").innerHTML += a;
+      };
+
     </script>
   </body>
 </html>
