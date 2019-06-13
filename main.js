@@ -17,32 +17,51 @@
       };
 
       const drawArrows = function(i, j, index) {
-        //console.log("read dependencyPath", dependencyPath);
-        //console.log(timelineplus.itemSet.items[i]);
-        var item_i = getItemPos(timelineplus.itemSet.items[i]);
-        var item_j = getItemPos(timelineplus.itemSet.items[j]);
-        if (item_j.mid_x < item_i.mid_x) [item_i, item_j] = [item_j, item_i]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
-        var curveLen = item_i.height * 2; // Length of straight Bezier segment out of the item.
-        item_j.left -= 10; // Space for the arrowhead.
-        dependencyPath[index].setAttribute(
-          "d",
-          "M " +
-            item_i.right +
-            " " +
-            item_i.mid_y +
-            " C " +
-            (item_i.right + curveLen) +
-            " " +
-            item_i.mid_y +
-            " " +
-            (item_j.left - curveLen) +
-            " " +
-            item_j.mid_y +
-            " " +
-            item_j.left +
-            " " +
-            item_j.mid_y
-        );
+        let groupOf_i = items.get(i).group;
+        let groupOf_j = items.get(j).group;
+        
+        if ( groups._data[groupOf_i].hasOwnProperty('visible') ) {
+            groupOf_i_isVisible = groups._data[groupOf_i].visible;
+        } else {
+            groupOf_i_isVisible = true;
+        }
+
+        if ( groups._data[groupOf_j].hasOwnProperty('visible') ) {
+            groupOf_j_isVisible = groups._data[groupOf_j].visible;
+        } else {
+            groupOf_j_isVisible = true;
+        }
+
+        if (groupOf_i_isVisible && groupOf_j_isVisible) {
+       
+            var item_i = getItemPos(timelineplus.itemSet.items[i]);
+            var item_j = getItemPos(timelineplus.itemSet.items[j]);
+            if (item_j.mid_x < item_i.mid_x) [item_i, item_j] = [item_j, item_i]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
+            var curveLen = item_i.height * 2; // Length of straight Bezier segment out of the item.
+            item_j.left -= 10; // Space for the arrowhead.
+            dependencyPath[index].setAttribute(
+            "d",
+            "M " +
+                item_i.right +
+                " " +
+                item_i.mid_y +
+                " C " +
+                (item_i.right + curveLen) +
+                " " +
+                item_i.mid_y +
+                " " +
+                (item_j.left - curveLen) +
+                " " +
+                item_j.mid_y +
+                " " +
+                item_j.left +
+                " " +
+                item_j.mid_y
+            );
+        } else {
+            dependencyPath[index].setAttribute("d", "M 0 0");
+        }
+
       };
 
       const dependency = [[1, 2], [3, 5], [6, 7], [3, 8]];
@@ -182,4 +201,10 @@
         //console.log(a);
         document.getElementById("visibleItemsContainer").innerHTML = ""
         document.getElementById("visibleItemsContainer").innerHTML += a;
+      };
+
+      function showGroups (){
+        groups.forEach(function(group){
+          groups.update({id: group.id, visible: true});
+        })
       };
