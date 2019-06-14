@@ -1,78 +1,4 @@
       /**
-      *Función que recibe in Item y devuelve la posición en pantalla del item.
-      */
-     const getItemPos = function(item) {
-        left_x = item.left;
-        top_y = item.parent.top + item.parent.height - item.top - item.height;
-        return {
-          left: left_x,
-          top: top_y,
-          right: left_x + item.width,
-          bottom: top_y + item.height,
-          mid_x: left_x + item.width / 2,
-          mid_y: top_y + item.height / 2,
-          width: item.width,
-          height: item.height
-        };
-      };
-
-      const drawArrows = function(i, j, index) {
-        let groupOf_i = items.get(i).group;
-        let groupOf_j = items.get(j).group;
-        
-        if ( groups._data[groupOf_i].hasOwnProperty('visible') ) {
-            groupOf_i_isVisible = groups._data[groupOf_i].visible;
-        } else {
-            groupOf_i_isVisible = true;
-        }
-
-        if ( groups._data[groupOf_j].hasOwnProperty('visible') ) {
-            groupOf_j_isVisible = groups._data[groupOf_j].visible;
-        } else {
-            groupOf_j_isVisible = true;
-        }
-
-        if (groupOf_i_isVisible && groupOf_j_isVisible) {
-       
-            var item_i = getItemPos(timelineplus.itemSet.items[i]);
-            var item_j = getItemPos(timelineplus.itemSet.items[j]);
-            if (item_j.mid_x < item_i.mid_x) [item_i, item_j] = [item_j, item_i]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
-            var curveLen = item_i.height * 2; // Length of straight Bezier segment out of the item.
-            item_j.left -= 10; // Space for the arrowhead.
-            dependencyPath[index].setAttribute(
-            "d",
-            "M " +
-                item_i.right +
-                " " +
-                item_i.mid_y +
-                " C " +
-                (item_i.right + curveLen) +
-                " " +
-                item_i.mid_y +
-                " " +
-                (item_j.left - curveLen) +
-                " " +
-                item_j.mid_y +
-                " " +
-                item_j.left +
-                " " +
-                item_j.mid_y
-            );
-        } else {
-            dependencyPath[index].setAttribute("d", "M 0 0");
-        }
-
-      };
-
-      const dependency = [[1, 2], [3, 5], [6, 7], [3, 8]];
-
-      const drawDependencies = dependency => {
-        dependency.map((dep, index) => drawArrows(...dep, index));
-      };
-
-
-
-      /**
       *CREATING THE TIMELINE 
       */
 
@@ -137,34 +63,98 @@
       const timelineplus = new timeline.Timeline(container, items, groups, options);
 
 
+
+
+
+
+      /**
+      *CREATING THE ARROWS 
+      */    
+
+
+      //Función que recibe in Item y devuelve la posición en pantalla del item.
+      const getItemPos = function(item) {
+      left_x = item.left;
+      top_y = item.parent.top + item.parent.height - item.top - item.height;
+      return {
+        left: left_x,
+        top: top_y,
+        right: left_x + item.width,
+        bottom: top_y + item.height,
+        mid_x: left_x + item.width / 2,
+        mid_y: top_y + item.height / 2,
+        width: item.width,
+        height: item.height
+      };
+      };
+
+      const drawArrows = function(i, j, index) {
+        let groupOf_i = items.get(i).group;
+        let groupOf_j = items.get(j).group;
+        
+        if ( groups._data[groupOf_i].hasOwnProperty('visible') ) {
+            groupOf_i_isVisible = groups._data[groupOf_i].visible;
+        } else {
+            groupOf_i_isVisible = true;
+        }
+
+        if ( groups._data[groupOf_j].hasOwnProperty('visible') ) {
+            groupOf_j_isVisible = groups._data[groupOf_j].visible;
+        } else {
+            groupOf_j_isVisible = true;
+        }
+
+        if (groupOf_i_isVisible && groupOf_j_isVisible) {
+            var item_i = getItemPos(timelineplus.itemSet.items[i]);
+            var item_j = getItemPos(timelineplus.itemSet.items[j]);
+            if (item_j.mid_x < item_i.mid_x) [item_i, item_j] = [item_j, item_i]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
+            var curveLen = item_i.height * 2; // Length of straight Bezier segment out of the item.
+            item_j.left -= 10; // Space for the arrowhead.
+            dependencyPath[index].setAttribute(
+            "d",
+            "M " +
+                item_i.right +
+                " " +
+                item_i.mid_y +
+                " C " +
+                (item_i.right + curveLen) +
+                " " +
+                item_i.mid_y +
+                " " +
+                (item_j.left - curveLen) +
+                " " +
+                item_j.mid_y +
+                " " +
+                item_j.left +
+                " " +
+                item_j.mid_y
+            );
+        } else {
+            dependencyPath[index].setAttribute("d", "M 0 0");
+        }
+
+      };
+
+      const dependency = [[1, 2], [3, 5], [6, 7], [3, 8]];
+
+      const drawDependencies = dependency => {
+        dependency.map((dep, index) => drawArrows(...dep, index));
+      };
+
+
+
+
+
+
+
+
       // Create SVG layer on top of timeline "center" div.
       svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       const myArrow = new Arrow(svg, timelineplus);
       myArrow.initialize();
       
 
-      
-      // Add arrowhead definition to SVG.
-      var arrowHead = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "marker"
-      );
-      arrowHead.setAttribute("id", "arrowhead0");
-      arrowHead.setAttribute("viewBox", "-10 -5 10 10");
-      arrowHead.setAttribute("refX", "-7");
-      arrowHead.setAttribute("refY", "0");
-      arrowHead.setAttribute("markerUnits", "strokeWidth");
-      arrowHead.setAttribute("markerWidth", "3");
-      arrowHead.setAttribute("markerHeight", "3");
-      arrowHead.setAttribute("orient", "auto");
-      var arrowHeadPath = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path"
-      );
-      arrowHeadPath.setAttribute("d", "M 0 0 L -10 -5 L -7.5 0 L -10 5 z");
-      arrowHeadPath.style.fill = "#F00";
-      arrowHead.appendChild(arrowHeadPath);
-      svg.appendChild(arrowHead);
+
       // Add empty path (for now); it will be dynamically modified.
       const dependencyPath = [];
       //Aqui añadimos todas las flechas al DOM, pero de momento, todas tienen un "tamaño" de 0 (ver linea: somePath.setAttribute("d", "M 0 0");)
@@ -183,6 +173,9 @@
         dependencyPath.push(somePath);
         svg.appendChild(somePath);
       }
+
+
+
 
 
 
