@@ -40,5 +40,6 @@ class Arrow {
         this.arrowHead.appendChild(this.arrowHeadPath);
         this.svg.appendChild(this.arrowHead);
     }
+    
   
   }

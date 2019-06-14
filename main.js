@@ -119,6 +119,7 @@
             if (item_j.mid_x < item_i.mid_x) [item_i, item_j] = [item_j, item_i]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
             var curveLen = item_i.height * 2; // Length of straight Bezier segment out of the item.
             item_j.left -= 10; // Space for the arrowhead.
+            dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
             dependencyPath[index].setAttribute(
             "d",
             "M " +
@@ -139,6 +140,7 @@
                 item_j.mid_y
             );
         } else {
+            dependencyPath[index].setAttribute("marker-end", "");
             dependencyPath[index].setAttribute("d", "M 0 0");
         }
 
@@ -181,7 +183,7 @@
           "path"
         );
         somePath.setAttribute("d", "M 0 0");
-        somePath.setAttribute("marker-end", "url(#arrowhead0)");
+        //somePath.setAttribute("marker-end", "url(#arrowhead0)");
         somePath.style.stroke = "#F00";
         somePath.style.strokeWidth = "3px";
         somePath.style.fill = "none";
