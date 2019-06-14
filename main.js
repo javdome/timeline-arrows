@@ -1,4 +1,4 @@
- /**
+      /**
       *Función que recibe in Item y devuelve la posición en pantalla del item.
       */
      const getItemPos = function(item) {
@@ -136,16 +136,14 @@
       const container = document.getElementById("visualization");
       const timelineplus = new timeline.Timeline(container, items, groups, options);
 
+
       // Create SVG layer on top of timeline "center" div.
       svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      svg.style.position = "absolute";
-      svg.style.top = "0px";
-      svg.style.height = "100%";
-      svg.style.width = "100%";
-      svg.style.display = "block";
-      svg.style.zIndex = "1"; // Should it be above or below? (1 for above, -1 for below)
-      svg.style.pointerEvents = "none"; // To click through, if we decide to put it above other elements.
-      timelineplus.dom.center.appendChild(this.svg);
+      const myArrow = new Arrow(svg, timelineplus);
+      myArrow.initialize();
+      
+
+      
       // Add arrowhead definition to SVG.
       var arrowHead = document.createElementNS(
         "http://www.w3.org/2000/svg",
