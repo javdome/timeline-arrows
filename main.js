@@ -89,6 +89,15 @@
       };
 
       const drawArrows = function(i, j, index) {
+        //Checks if at least one item is visible in screen
+        var visibleItems = timelineplus.getVisibleItems();
+        var oneItemVisible = false;
+        for (let k = 0; k < visibleItems.length ; k++) {
+          if (i == visibleItems[k]) oneItemVisible = true;
+          if (j == visibleItems[k]) oneItemVisible = true;
+        }
+
+        //Checks if the groups of items are both visible
         let groupOf_i = items.get(i).group;
         let groupOf_j = items.get(j).group;
         
@@ -104,7 +113,7 @@
             groupOf_j_isVisible = true;
         }
 
-        if (groupOf_i_isVisible && groupOf_j_isVisible) {
+        if ( (groupOf_i_isVisible && groupOf_j_isVisible) && (oneItemVisible) ) {
             var item_i = getItemPos(timelineplus.itemSet.items[i]);
             var item_j = getItemPos(timelineplus.itemSet.items[j]);
             if (item_j.mid_x < item_i.mid_x) [item_i, item_j] = [item_j, item_i]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
@@ -136,9 +145,15 @@
       };
 
       const dependency = [[1, 2], [3, 5], [6, 7], [3, 8]];
-
+      /*
       const drawDependencies = dependency => {
         dependency.map((dep, index) => drawArrows(...dep, index));
+      };
+      */
+     const drawDependencies = function(dependency) {
+      dependency.map(function(dep, index) {
+         drawArrows(...dep, index)
+        });
       };
 
 
