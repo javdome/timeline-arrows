@@ -86,7 +86,6 @@
 
 
 
-
       /*OTROS FUNCIONES SIN IMPOSTANCIA*/
       function showVisibleItems() {
         var a = timelineplus.getVisibleItems();

@@ -80,34 +80,44 @@ class Arrow {
     }
 
     drawArrows(i, j, index) {
-        //console.log(index);
-        //Checks if at least one item is visible in screen
-        var visibleItems = this.timeline.getVisibleItems();
-        var oneItemVisible = false;
-        for (let k = 0; k < visibleItems.length ; k++) {
-          if (i == visibleItems[k]) oneItemVisible = true;
-          if (j == visibleItems[k]) oneItemVisible = true;
+        //Checks if both items exist
+        if( (typeof timelineplus.itemsData._data[i] !== "undefined") && (typeof timelineplus.itemsData._data[j] !== "undefined") ) {
+            var bothItemsExist = true;
+        } else {
+            var bothItemsExist = false;
         }
-        //console.log(this.timeline);
-        //Checks if the groups of items are both visible
-        //let groupOf_i = items.get(i).group;
-        let groupOf_i = this.timeline.itemsData._data[i].group;
-        //let groupOf_j = items.get(j).group;
-        let groupOf_j = this.timeline.itemsData._data[j].group;
         
-        if ( this.timeline.groupsData._data._data[groupOf_i].hasOwnProperty('visible') ) {
-            var groupOf_i_isVisible = this.timeline.groupsData._data._data[groupOf_i].visible;
-        } else {
-            var groupOf_i_isVisible = true;
+        //Checks if at least one item is visible in screen
+        var oneItemVisible = false; //Iniciamos a false
+        if (bothItemsExist) {    
+            var visibleItems = this.timeline.getVisibleItems();
+            for (let k = 0; k < visibleItems.length ; k++) {
+                if (i == visibleItems[k]) oneItemVisible = true;
+                if (j == visibleItems[k]) oneItemVisible = true;
+            }
+        
+            //Checks if the groups of items are both visible
+            var groupOf_i_isVisible = false; //Iniciamos a false
+            var groupOf_j_isVisible = false; //Iniciamos a false
+            
+            let groupOf_i = this.timeline.itemsData._data[i].group; //let groupOf_i = items.get(i).group;
+            
+            let groupOf_j = this.timeline.itemsData._data[j].group; //let groupOf_j = items.get(j).group;
+            
+            if ( this.timeline.groupsData._data._data[groupOf_i].hasOwnProperty('visible') ) {
+                var groupOf_i_isVisible = this.timeline.groupsData._data._data[groupOf_i].visible;
+            } else {
+                var groupOf_i_isVisible = true;
+            }
+
+            if ( this.timeline.groupsData._data._data[groupOf_j].hasOwnProperty('visible') ) {
+                var groupOf_j_isVisible = this.timeline.groupsData._data._data[groupOf_j].visible;
+            } else {
+                var groupOf_j_isVisible = true;
+            }
         }
 
-        if ( this.timeline.groupsData._data._data[groupOf_j].hasOwnProperty('visible') ) {
-            var groupOf_j_isVisible = this.timeline.groupsData._data._data[groupOf_j].visible;
-        } else {
-            var groupOf_j_isVisible = true;
-        }
-
-        if ( (groupOf_i_isVisible && groupOf_j_isVisible) && (oneItemVisible) ) {
+        if ( (groupOf_i_isVisible && groupOf_j_isVisible) && (oneItemVisible) && (bothItemsExist)) {
             var item_i = this.getItemPos(this.timeline.itemSet.items[i]);
             var item_j = this.getItemPos(this.timeline.itemSet.items[j]);
             if (item_j.mid_x < item_i.mid_x) [item_i, item_j] = [item_j, item_i]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
