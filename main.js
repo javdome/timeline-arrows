@@ -81,8 +81,8 @@
 
       
 
-
-
+      //Ejemplo de añadir nueva flecha (entre items 15 y 16)
+      myArrow.addArrow([15,16]);
 
 
 

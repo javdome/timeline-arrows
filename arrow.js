@@ -140,6 +140,11 @@ class Arrow {
 
     }
 
+    addArrow (dep) {
+        this.dependency.push(dep);
+        this.createPath();
+    }
+
     //Función que recibe in Item y devuelve la posición en pantalla del item.
     getItemPos (item) {
         let left_x = item.left;
