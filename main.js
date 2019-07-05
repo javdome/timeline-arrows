@@ -74,7 +74,47 @@
       */    
 
       //Dependencies array
-      var dependency = [[1, 2], [3, 5], [6, 7], [3, 8]];
+      //var dependency = [[1, 2], [3, 5], [6, 7], [3, 8]];
+
+
+      /**
+       * dependency quiero que sea un array de objetos:
+       *  {
+       *    id,
+       *    id_item_inicio,
+       *    id_item_fin,
+       *    descripcion   
+       *  }
+       */
+      var dependency = [
+        {
+          'id': 2,
+          'id_item_inicio': 1,
+          'id_item_fin': 2,
+          'descripcion': 'Hola Rafa'   
+        },
+        {
+          'id': 5,
+          'id_item_inicio': 3,
+          'id_item_fin': 5,
+          'descripcion': 'Hola Rafa'   
+        },
+        {
+          'id': 7,
+          'id_item_inicio': 6,
+          'id_item_fin': 7,
+          'descripcion': 'Hola Rafa'   
+        },
+        {
+          'id': 10,
+          'id_item_inicio': 3,
+          'id_item_fin': 8,
+          'descripcion': 'Hola Rafa'   
+        }
+      ];
+
+
+
  
       // Create instance of Arrow for a timeline objetc and its denpedencies
       const myArrow = new Arrow(timelineplus, dependency);
@@ -82,8 +122,17 @@
       
 
       //Ejemplo de añadir nueva flecha (entre items 15 y 16)
-      myArrow.addArrow([15,16]);
+      //myArrow.addArrow([15,16]);
+      myArrow.addArrow(
+        {
+          'id': 13,
+          'id_item_inicio': 15,
+          'id_item_fin': 16,
+          'descripcion': 'Hola Rafa'   
+        }
+      );
 
+      console.log(dependency);
 
 
       /*OTROS FUNCIONES SIN IMPOSTANCIA*/

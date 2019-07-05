@@ -70,7 +70,7 @@ class Arrow {
     drawDependencies() {
         //Create paths for the started dependency array
         for (let i = 0; i < this.dependency.length; i++) {
-            this.drawArrows(...this.dependency[i], i);
+            this.drawArrows(this.dependency[i], i);
         }
         /*
         this.dependency.map(function(dep, index) {
@@ -79,9 +79,9 @@ class Arrow {
         */
     }
 
-    drawArrows(i, j, index) {
+    drawArrows(dep, index) {
         //Checks if both items exist
-        if( (typeof timelineplus.itemsData._data[i] !== "undefined") && (typeof timelineplus.itemsData._data[j] !== "undefined") ) {
+        if( (typeof timelineplus.itemsData._data[dep.id_item_inicio] !== "undefined") && (typeof timelineplus.itemsData._data[dep.id_item_fin] !== "undefined") ) {
             var bothItemsExist = true;
         } else {
             var bothItemsExist = false;
@@ -92,56 +92,56 @@ class Arrow {
         if (bothItemsExist) {    
             var visibleItems = this.timeline.getVisibleItems();
             for (let k = 0; k < visibleItems.length ; k++) {
-                if (i == visibleItems[k]) oneItemVisible = true;
-                if (j == visibleItems[k]) oneItemVisible = true;
+                if (dep.id_item_inicio == visibleItems[k]) oneItemVisible = true;
+                if (dep.id_item_fin == visibleItems[k]) oneItemVisible = true;
             }
         
             //Checks if the groups of items are both visible
-            var groupOf_i_isVisible = false; //Iniciamos a false
-            var groupOf_j_isVisible = false; //Iniciamos a false
+            var groupOf_inicio_isVisible = false; //Iniciamos a false
+            var groupOf_fin_isVisible = false; //Iniciamos a false
             
-            let groupOf_i = this.timeline.itemsData._data[i].group; //let groupOf_i = items.get(i).group;
+            let groupOf_inicio = this.timeline.itemsData._data[dep.id_item_inicio].group; //let groupOf_inicio = items.get(dep.id_item_inicio).group;
             
-            let groupOf_j = this.timeline.itemsData._data[j].group; //let groupOf_j = items.get(j).group;
+            let groupOf_fin = this.timeline.itemsData._data[dep.id_item_fin].group; //let groupOf_fin = items.get(dep.id_item_fin).group;
             
-            if ( this.timeline.groupsData._data._data[groupOf_i].hasOwnProperty('visible') ) {
-                var groupOf_i_isVisible = this.timeline.groupsData._data._data[groupOf_i].visible;
+            if ( this.timeline.groupsData._data._data[groupOf_inicio].hasOwnProperty('visible') ) {
+                var groupOf_inicio_isVisible = this.timeline.groupsData._data._data[groupOf_inicio].visible;
             } else {
-                var groupOf_i_isVisible = true;
+                var groupOf_inicio_isVisible = true;
             }
 
-            if ( this.timeline.groupsData._data._data[groupOf_j].hasOwnProperty('visible') ) {
-                var groupOf_j_isVisible = this.timeline.groupsData._data._data[groupOf_j].visible;
+            if ( this.timeline.groupsData._data._data[groupOf_fin].hasOwnProperty('visible') ) {
+                var groupOf_fin_isVisible = this.timeline.groupsData._data._data[groupOf_fin].visible;
             } else {
-                var groupOf_j_isVisible = true;
+                var groupOf_fin_isVisible = true;
             }
         }
 
-        if ( (groupOf_i_isVisible && groupOf_j_isVisible) && (oneItemVisible) && (bothItemsExist)) {
-            var item_i = this.getItemPos(this.timeline.itemSet.items[i]);
-            var item_j = this.getItemPos(this.timeline.itemSet.items[j]);
-            if (item_j.mid_x < item_i.mid_x) [item_i, item_j] = [item_j, item_i]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
-            var curveLen = item_i.height * 2; // Length of straight Bezier segment out of the item.
-            item_j.left -= 10; // Space for the arrowhead.
+        if ( (groupOf_inicio_isVisible && groupOf_fin_isVisible) && (oneItemVisible) && (bothItemsExist)) {
+            var item_inicio = this.getItemPos(this.timeline.itemSet.items[dep.id_item_inicio]);
+            var item_fin = this.getItemPos(this.timeline.itemSet.items[dep.id_item_fin]);
+            if (item_fin.mid_x < item_inicio.mid_x) [item_inicio, item_fin] = [item_fin, item_inicio]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
+            var curveLen = item_inicio.height * 2; // Length of straight Bezier segment out of the item.
+            item_fin.left -= 10; // Space for the arrowhead.
             this.dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
             this.dependencyPath[index].setAttribute(
             "d",
             "M " +
-                item_i.right +
+                item_inicio.right +
                 " " +
-                item_i.mid_y +
+                item_inicio.mid_y +
                 " C " +
-                (item_i.right + curveLen) +
+                (item_inicio.right + curveLen) +
                 " " +
-                item_i.mid_y +
+                item_inicio.mid_y +
                 " " +
-                (item_j.left - curveLen) +
+                (item_fin.left - curveLen) +
                 " " +
-                item_j.mid_y +
+                item_fin.mid_y +
                 " " +
-                item_j.left +
+                item_fin.left +
                 " " +
-                item_j.mid_y
+                item_fin.mid_y
             );
         } else {
             this.dependencyPath[index].setAttribute("marker-end", "");
