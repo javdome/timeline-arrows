@@ -73,10 +73,6 @@
       *CREATING THE ARROWS 
       */    
 
-      //Dependencies array
-      //var dependency = [[1, 2], [3, 5], [6, 7], [3, 8]];
-
-
       /**
        * dependency quiero que sea un array de objetos:
        *  {
@@ -132,8 +128,8 @@
         }
       );
 
-      console.log(dependency);
 
+      
 
       /*OTROS FUNCIONES SIN IMPOSTANCIA*/
       function showVisibleItems() {
@@ -148,3 +144,7 @@
           groups.update({id: group.id, visible: true});
         })
       };
+
+      function elimina () {
+        myArrow.removeArrow(10);
+      }

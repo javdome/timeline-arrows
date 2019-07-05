@@ -170,5 +170,21 @@ class Arrow {
             height: item.height
         }
     }
-  
+    
+    //Función que recibe el id de una flecha y la elimina.
+    removeArrow(id) {
+        for (let i = 0; i < this.dependency.length; i++) {
+            if (this.dependency[i].id == id) var index = i;
+        }
+
+        var list = document.getElementsByTagName("path");
+
+        this.dependency.splice(index, 1); //Elimino del array dependency
+        this.dependencyPath.splice(index, 1); //Elimino del array dependencyPath
+        
+        list[index + 1].parentNode.removeChild(list[index + 1]); //Lo elimino del dom
+
+        
+    }
+
   }
