@@ -177,7 +177,8 @@ class Arrow {
             if (this.dependency[i].id == id) var index = i;
         }
 
-        var list = document.getElementsByTagName("path");
+        //var list = document.getElementsByTagName("path"); //FALTA QUE ESTA SELECCION LA HAGA PARA EL DOM DEL TIMELINE INSTANCIADO!!!!
+        var list = document.querySelectorAll("#" +this.timeline.dom.container.id +" path");
 
         this.dependency.splice(index, 1); //Elimino del array dependency
         this.dependencyPath.splice(index, 1); //Elimino del array dependencyPath
