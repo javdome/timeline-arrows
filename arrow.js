@@ -81,7 +81,7 @@ class Arrow {
 
     drawArrows(dep, index) {
         //Checks if both items exist
-        if( (typeof timelineplus.itemsData._data[dep.id_item_inicio] !== "undefined") && (typeof timelineplus.itemsData._data[dep.id_item_fin] !== "undefined") ) {
+        if( (typeof timelineplus.itemsData._data[dep.id_item_1] !== "undefined") && (typeof timelineplus.itemsData._data[dep.id_item_2] !== "undefined") ) {
             var bothItemsExist = true;
         } else {
             var bothItemsExist = false;
@@ -92,56 +92,56 @@ class Arrow {
         if (bothItemsExist) {    
             var visibleItems = this.timeline.getVisibleItems();
             for (let k = 0; k < visibleItems.length ; k++) {
-                if (dep.id_item_inicio == visibleItems[k]) oneItemVisible = true;
-                if (dep.id_item_fin == visibleItems[k]) oneItemVisible = true;
+                if (dep.id_item_1 == visibleItems[k]) oneItemVisible = true;
+                if (dep.id_item_2 == visibleItems[k]) oneItemVisible = true;
             }
         
             //Checks if the groups of items are both visible
-            var groupOf_inicio_isVisible = false; //Iniciamos a false
-            var groupOf_fin_isVisible = false; //Iniciamos a false
+            var groupOf_1_isVisible = false; //Iniciamos a false
+            var groupOf_2_isVisible = false; //Iniciamos a false
             
-            let groupOf_inicio = this.timeline.itemsData._data[dep.id_item_inicio].group; //let groupOf_inicio = items.get(dep.id_item_inicio).group;
+            let groupOf_1 = this.timeline.itemsData._data[dep.id_item_1].group; //let groupOf_1 = items.get(dep.id_item_1).group;
             
-            let groupOf_fin = this.timeline.itemsData._data[dep.id_item_fin].group; //let groupOf_fin = items.get(dep.id_item_fin).group;
+            let groupOf_2 = this.timeline.itemsData._data[dep.id_item_2].group; //let groupOf_2 = items.get(dep.id_item_2).group;
             
-            if ( this.timeline.groupsData._data._data[groupOf_inicio].hasOwnProperty('visible') ) {
-                var groupOf_inicio_isVisible = this.timeline.groupsData._data._data[groupOf_inicio].visible;
+            if ( this.timeline.groupsData._data._data[groupOf_1].hasOwnProperty('visible') ) {
+                var groupOf_1_isVisible = this.timeline.groupsData._data._data[groupOf_1].visible;
             } else {
-                var groupOf_inicio_isVisible = true;
+                var groupOf_1_isVisible = true;
             }
 
-            if ( this.timeline.groupsData._data._data[groupOf_fin].hasOwnProperty('visible') ) {
-                var groupOf_fin_isVisible = this.timeline.groupsData._data._data[groupOf_fin].visible;
+            if ( this.timeline.groupsData._data._data[groupOf_2].hasOwnProperty('visible') ) {
+                var groupOf_2_isVisible = this.timeline.groupsData._data._data[groupOf_2].visible;
             } else {
-                var groupOf_fin_isVisible = true;
+                var groupOf_2_isVisible = true;
             }
         }
 
-        if ( (groupOf_inicio_isVisible && groupOf_fin_isVisible) && (oneItemVisible) && (bothItemsExist)) {
-            var item_inicio = this.getItemPos(this.timeline.itemSet.items[dep.id_item_inicio]);
-            var item_fin = this.getItemPos(this.timeline.itemSet.items[dep.id_item_fin]);
-            if (item_fin.mid_x < item_inicio.mid_x) [item_inicio, item_fin] = [item_fin, item_inicio]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
-            var curveLen = item_inicio.height * 2; // Length of straight Bezier segment out of the item.
-            item_fin.left -= 10; // Space for the arrowhead.
+        if ( (groupOf_1_isVisible && groupOf_2_isVisible) && (oneItemVisible) && (bothItemsExist)) {
+            var item_1 = this.getItemPos(this.timeline.itemSet.items[dep.id_item_1]);
+            var item_2 = this.getItemPos(this.timeline.itemSet.items[dep.id_item_2]);
+            if (item_2.mid_x < item_1.mid_x) [item_1, item_2] = [item_2, item_1]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
+            var curveLen = item_1.height * 2; // Length of straight Bezier segment out of the item.
+            item_2.left -= 10; // Space for the arrowhead.
             this.dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
             this.dependencyPath[index].setAttribute(
             "d",
             "M " +
-                item_inicio.right +
+                item_1.right +
                 " " +
-                item_inicio.mid_y +
+                item_1.mid_y +
                 " C " +
-                (item_inicio.right + curveLen) +
+                (item_1.right + curveLen) +
                 " " +
-                item_inicio.mid_y +
+                item_1.mid_y +
                 " " +
-                (item_fin.left - curveLen) +
+                (item_2.left - curveLen) +
                 " " +
-                item_fin.mid_y +
+                item_2.mid_y +
                 " " +
-                item_fin.left +
+                item_2.left +
                 " " +
-                item_fin.mid_y
+                item_2.mid_y
             );
         } else {
             this.dependencyPath[index].setAttribute("marker-end", "");

@@ -45,6 +45,7 @@
       var items = new timeline.DataSet();
       for (var i = 0; i < itemCount; i++) {
         var start = now.clone().add(Math.random() * 200, "hours");
+        var end = start + 100000000;
         var group = Math.floor(Math.random() * names.length);
         items.add({
           id: i,
@@ -56,7 +57,8 @@
             names[group] +
             ")</span>",
           start: start,
-          type: "box"
+          end: end,
+          //type: "box"
         });
       }
       // Create visualization.
@@ -77,35 +79,35 @@
        * dependency quiero que sea un array de objetos:
        *  {
        *    id,
-       *    id_item_inicio,
-       *    id_item_fin,
+       *    id_item_1,
+       *    id_item_2,
        *    descripcion   
        *  }
        */
       var dependency = [
         {
-          'id': 2,
-          'id_item_inicio': 1,
-          'id_item_fin': 2,
-          'descripcion': 'Hola Rafa'   
+          id: 2,
+          id_item_1: 1,
+          id_item_2: 2,
+          descripcion: 'Hola Rafa'   
         },
         {
-          'id': 5,
-          'id_item_inicio': 3,
-          'id_item_fin': 5,
-          'descripcion': 'Hola Rafa'   
+          id: 5,
+          id_item_1: 3,
+          id_item_2: 5,
+          descripcion: 'Hola Rafa'   
         },
         {
-          'id': 7,
-          'id_item_inicio': 6,
-          'id_item_fin': 7,
-          'descripcion': 'Hola Rafa'   
+          id: 7,
+          id_item_1: 6,
+          id_item_2: 7,
+          descripcion: 'Hola Rafa'   
         },
         {
-          'id': 10,
-          'id_item_inicio': 3,
-          'id_item_fin': 8,
-          'descripcion': 'Hola Rafa'   
+          id: 10,
+          id_item_1: 3,
+          id_item_2: 8,
+          descripcion: 'Hola Rafa'   
         }
       ];
 
@@ -121,10 +123,10 @@
       //myArrow.addArrow([15,16]);
       myArrow.addArrow(
         {
-          'id': 13,
-          'id_item_inicio': 15,
-          'id_item_fin': 16,
-          'descripcion': 'Hola Rafa'   
+          id: 13,
+          id_item_1: 15,
+          id_item_2: 16,
+          descripcion: 'Hola Rafa'   
         }
       );
 
