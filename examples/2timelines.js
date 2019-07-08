@@ -1,5 +1,5 @@
       /**
-      *CREATING THE TIMELINE 
+      *CREATING THE TIMELINE 1
       */
 
       const options = {
@@ -67,7 +67,94 @@
 
 
 
-      console.log(timelineplus);
+      /**
+      *CREATING THE TIMELINE 2
+      */
+
+     const options2 = {
+      groupOrder: "content", // groupOrder can be a property name or a sorting function
+      selectable: true,
+      editable: true,
+      onInitialDrawComplete: function() {
+        myArrow2.drawDependencies();
+        myArrow2.timeline.on("changed", () => {
+          myArrow2.drawDependencies();
+          
+        }); //NOTE: We hijack the on "changed" event to draw the arrow.
+      },
+      //verticalScroll: true,
+      groupTemplate: function(group) { //Con esto añadimos el boton de ocultar en los grupos
+        var container = document.createElement('div');
+        var label = document.createElement('span');
+        label.innerHTML = group.content + ' ';
+        container.insertAdjacentElement('afterBegin',label);
+        
+        var hide = document.createElement('span');
+        hide.setAttribute("class", "oi oi-eye");
+        hide.addEventListener('click',function(){
+          groups2.update({id: group.id, visible: false});
+        });
+        container.insertAdjacentElement('beforeEnd',hide);     
+        return container;
+      }
+    };
+
+    // Generate some
+    var now2 = moment()
+      .minutes(0)
+      .seconds(0)
+      .milliseconds(0);
+    var names2 = ["Juan", "Alfredo", "Luis", "David"];
+    var itemCount2 = 20;
+    // create a data set with groups
+    var groups2 = new timeline.DataSet();
+    for (var g = 0; g < names2.length; g++) {
+      groups2.add({ id: g, content: names2[g] });
+    }
+    // create a dataset with items
+    var items2 = new timeline.DataSet();
+    for (var i = 0; i < itemCount2; i++) {
+      var start = now2.clone().add(Math.random() * 200, "hours");
+      var end = start + 100000000;
+      var group = Math.floor(Math.random() * names2.length);
+      items2.add({
+        id: i,
+        group: group,
+        content:
+          "item " +
+          i +
+          ' <span style="color:#97B0F8;">(' +
+          names2[group] +
+          ")</span>",
+        start: start,
+        end: end,
+        //type: "box"
+      });
+    }
+    // Create visualization.
+    const container2 = document.getElementById("visualization2");
+    const timelineplus2 = new timeline.Timeline(container2, items2, groups2, options2);
+
+
+
+
+    /* SINCRONIZACION DEL MOVIMIENTO DE LAS TIMELINES */
+
+      //Eventos y Funciones que sincronizan el movimiento de ambas timeLines
+      timelineplus2.on('rangechange', function () {
+        onrangechange2();
+      });
+      timelineplus.on('rangechange', function () {
+        onrangechange1();
+      });
+      function onrangechange1() {
+        var range = timelineplus.getWindow();
+        timelineplus2.setWindow(range.start, range.end, {animation: false});
+      }
+      function onrangechange2() {
+        var range = timelineplus2.getWindow();
+        timelineplus.setWindow(range.start, range.end, {animation: false});
+      }
 
 
 
@@ -113,11 +200,38 @@
 
 
 
+      var dependency2 = [
+        {
+          id: 2,
+          id_item_1: 1,
+          id_item_2: 2,
+          descripcion: 'Hola Rafa'   
+        },
+        {
+          id: 5,
+          id_item_1: 3,
+          id_item_2: 5,
+          descripcion: 'Hola Rafa'   
+        },
+        {
+          id: 7,
+          id_item_1: 6,
+          id_item_2: 7,
+          descripcion: 'Hola Rafa'   
+        },
+        {
+          id: 10,
+          id_item_1: 3,
+          id_item_2: 8,
+          descripcion: 'Hola Rafa'   
+        }
+      ];
+
  
       // Create instance of Arrow for a timeline objetc and its denpedencies
       const myArrow = new Arrow(timelineplus, dependency);
 
-      
+      const myArrow2 = new Arrow(timelineplus2, dependency2);
 
       //Ejemplo de añadir nueva flecha (entre items 15 y 16)
       //myArrow.addArrow([15,16]);
