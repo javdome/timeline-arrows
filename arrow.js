@@ -81,7 +81,7 @@ class Arrow {
 
     drawArrows(dep, index) {
         //Checks if both items exist
-        if( (typeof timelineplus.itemsData._data[dep.id_item_1] !== "undefined") && (typeof timelineplus.itemsData._data[dep.id_item_2] !== "undefined") ) {
+        if( (typeof this.timeline.itemsData._data[dep.id_item_1] !== "undefined") && (typeof timelineplus.itemsData._data[dep.id_item_2] !== "undefined") ) {
             var bothItemsExist = true;
         } else {
             var bothItemsExist = false;
@@ -184,8 +184,15 @@ class Arrow {
         this.dependencyPath.splice(index, 1); //Elimino del array dependencyPath
         
         list[index + 1].parentNode.removeChild(list[index + 1]); //Lo elimino del dom
-
-        
     }
+
+    //Función que recibe el id de un item y elimina la flecha.
+    removeArrowbyItemId(id) {
+        for (let i = 0; i < this.dependency.length; i++) {
+            if ( (this.dependency[i].id_item_1 == id) || (this.dependency[i].id_item_2 == id) ) this.removeArrow(this.dependency[i].id);
+        }
+    }
+
+
 
   }
