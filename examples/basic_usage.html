@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Timeline | Group example, with an arrow</title>
+    <!-- Fuentes de iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+    <style>
+      body,
+      html {
+        font-family: arial, sans-serif;
+        font-size: 11pt;
+      }
+      #visualization {
+        box-sizing: border-box;
+        width: 100%;
+        height: 300px;
+      }
+    </style>
+
+
+    <!-- note: moment.js must be loaded before vis.js, else vis.js uses its embedded version of moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+
+    <script src="https://unpkg.com/timeline-plus/dist/timeline.js"></script>
+    <link
+      href="https://unpkg.com/timeline-plus/dist/timeline.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <p>
+      This is the same example which is in
+      "vis/examples/timeline/groups/groups.html" but with multiple added arrows defined in the dependencies.
+      The original discussion thread is https://github.com/almende/vis/issues/1699.
+    </p>
+    <button onclick="showVisibleItems()">Show current visible items</button>
+    <button onclick="showGroups()">Show groups</button>
+    <button onclick="elimina()">Elimina flecha entre 3 y 8</button>
+    <div>
+      <h2>visible items:</h2>
+      <h3 id="visibleItemsContainer"></h3>
+    </div>
+    <div id="visualization"></div>
+
+    
+    <script src="../arrow.js"></script>
+    <script src="./basic_usage.js"></script>
+
+  </body>
+</html>
