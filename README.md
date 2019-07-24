@@ -70,3 +70,8 @@ my_Arrow.removeArrow ( 10 );
 my_Arrow.removeArrow ( 23 );
 ```
 
+## Examples
+
+You can see some examples here:
+
+https://javdome.github.io/timeline-arrows/index.html
