@@ -49,6 +49,12 @@ class Arrow {
         for (let i = 0; i < this.dependency.length; i++) {
             this.createPath();
         }
+        
+        //NOTE: We hijack the on "changed" event to draw the arrows.
+        this.timeline.on("changed", () => {
+            this.drawDependencies();
+        });
+
     }
     
     createPath(){
