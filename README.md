@@ -70,7 +70,3 @@ my_Arrow.removeArrow ( 10 );
 my_Arrow.removeArrow ( 23 );
 ```
 
-
-
-
-See the working example [here](https://gistpreview.github.io/?5c09b1cc4b21614255e8d426a6117e84) and the source code [here](https://gist.github.com/javdome/5c09b1cc4b21614255e8d426a6117e84)
