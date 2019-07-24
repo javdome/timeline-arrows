@@ -6,15 +6,6 @@
         groupOrder: "content", // groupOrder can be a property name or a sorting function
         selectable: true,
         editable: true,
-        /*
-        onInitialDrawComplete: function() {
-          //myArrow.drawDependencies();
-          //myArrow.timeline.on("changed", () => {
-            //myArrow.drawDependencies();
-            
-          //}); //NOTE: We hijack the on "changed" event to draw the arrow.
-        },
-        */
         groupTemplate: function(group) { //Con esto añadimos el boton de ocultar en los grupos
           var container = document.createElement('div');
           var label = document.createElement('span');

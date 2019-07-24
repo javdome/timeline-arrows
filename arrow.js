@@ -78,11 +78,6 @@ class Arrow {
         for (let i = 0; i < this.dependency.length; i++) {
             this.drawArrows(this.dependency[i], i);
         }
-        /*
-        this.dependency.map(function(dep, index) {
-           this.drawArrows(...dep, index);
-        });
-        */
     }
 
     drawArrows(dep, index) {
