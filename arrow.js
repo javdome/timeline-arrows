@@ -82,7 +82,7 @@ class Arrow {
 
     drawArrows(dep, index) {
         //Checks if both items exist
-        if( (typeof this.timeline.itemsData._data[dep.id_item_1] !== "undefined") && (typeof timelineplus.itemsData._data[dep.id_item_2] !== "undefined") ) {
+        if( (typeof this.timeline.itemsData._data[dep.id_item_1] !== "undefined") && (typeof this.timeline.itemsData._data[dep.id_item_2] !== "undefined") ) {
             var bothItemsExist = true;
         } else {
             var bothItemsExist = false;
