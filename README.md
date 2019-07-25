@@ -55,17 +55,23 @@ That's it :)
 
 I have created the following methods:
 
-**addArrow ( *arrow object* )**  Inserts a new arrow. Example:
+**addArrow ( *arrow object* )**  Inserts a new arrow.
+
+For instance:
 ```
 my_Arrow.addArrow ( { id: 13, id_item_1: 15, id_item_2: 16 } );
 ```
 
-**removeArrow ( *arrow_Id* )**   Removes the arrows with this arrow_Id. Example:
+**removeArrow ( *arrow_Id* )**   Removes the arrows with this arrow_Id. 
+
+For instance:
 ```
 my_Arrow.removeArrow ( 10 );
 ```
 
-**removeArrowbyItemId ( *item_Id* )**   Removes the arrows connected with Items with this item_Id. Example:
+**removeArrowbyItemId ( *item_Id* )**   Removes the arrows connected with Items with this item_Id.
+
+For instance:
 ```
 my_Arrow.removeArrow ( 23 );
 ```
