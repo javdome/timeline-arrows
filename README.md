@@ -15,7 +15,7 @@ For instance:
 <script src="./arrow.js"></script>
 ```
 
-2 - Create your timeline as usual (see vis-timeline docs).
+2 - Create your timeline as usual (see [vis-timeline docs](https://visjs.github.io/vis-timeline/docs/timeline/)).
 
 For instance:
 
@@ -73,7 +73,7 @@ my_Arrow.removeArrow ( 10 );
 
 For instance:
 ```
-my_Arrow.removeArrow ( 23 );
+my_Arrow.removeArrowbyItemId ( 23 );
 ```
 
 ## Examples
