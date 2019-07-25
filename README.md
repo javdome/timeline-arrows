@@ -55,23 +55,23 @@ That's it :)
 
 I have created the following methods:
 
-* `addArrow ( _arrow object_ )`  Inserts a new arrow:
+**addArrow ( *arrow object* )**  Inserts a new arrow. Example:
 ```
 my_Arrow.addArrow ( { id: 13, id_item_1: 15, id_item_2: 16 } );
 ```
 
-* `removeArrow ( _arrow_Id_ )`   Removes the arrows with this arrow_Id:
+**removeArrow ( *arrow_Id* )**   Removes the arrows with this arrow_Id. Example:
 ```
 my_Arrow.removeArrow ( 10 );
 ```
 
-* `removeArrowbyItemId ( _item_Id_ )`   Removes the arrows connected with Items with this item_Id:
+**removeArrowbyItemId ( *item_Id* )**   Removes the arrows connected with Items with this item_Id. Example:
 ```
 my_Arrow.removeArrow ( 23 );
 ```
 
 ## Examples
 
-You can see some examples here:
+You can see some working examples here:
 
 https://javdome.github.io/timeline-arrows/index.html

@@ -6,7 +6,7 @@
         groupOrder: "content", // groupOrder can be a property name or a sorting function
         selectable: true,
         editable: true,
-        groupTemplate: function(group) { //Con esto añadimos el boton de ocultar en los grupos
+        groupTemplate: function(group) { //function to hide groups
           var container = document.createElement('div');
           var label = document.createElement('span');
           label.innerHTML = group.content + ' ';
@@ -60,23 +60,12 @@
 
 
 
-      console.log(timelineplus);
 
 
 
       /**
       *CREATING THE ARROWS 
       */    
-
-      /**
-       * dependency quiero que sea un array de objetos:
-       *  {
-       *    id,
-       *    id_item_1,
-       *    id_item_2,
-       *    descripcion   
-       *  }
-       */
       var dependency = [
         {
           id: 2,
@@ -112,8 +101,7 @@
 
       
 
-      //Ejemplo de añadir nueva flecha (entre items 15 y 16)
-      //myArrow.addArrow([15,16]);
+      //Example of adding a new arrow (between items 15 and 16)
       myArrow.addArrow(
         {
           id: 13,
@@ -126,10 +114,9 @@
 
       
 
-      /*OTROS FUNCIONES SIN IMPOSTANCIA*/
+      /*ANOTHER FUNCTIONS (NO IMPORTANT)*/
       function showVisibleItems() {
         var a = timelineplus.getVisibleItems();
-        //console.log(a);
         document.getElementById("visibleItemsContainer").innerHTML = ""
         document.getElementById("visibleItemsContainer").innerHTML += a;
       };
@@ -140,6 +127,6 @@
         })
       };
 
-      function elimina () {
+      function remove () {
         myArrow.removeArrow(10);
       }

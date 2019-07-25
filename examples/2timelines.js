@@ -6,14 +6,7 @@
         groupOrder: "content", // groupOrder can be a property name or a sorting function
         selectable: true,
         editable: true,
-        onInitialDrawComplete: function() {
-          myArrow.drawDependencies();
-          myArrow.timeline.on("changed", () => {
-            myArrow.drawDependencies();
-            
-          }); //NOTE: We hijack the on "changed" event to draw the arrow.
-        },
-        groupTemplate: function(group) { //Con esto añadimos el boton de ocultar en los grupos
+        groupTemplate: function(group) { //function to hide groups
           var container = document.createElement('div');
           var label = document.createElement('span');
           label.innerHTML = group.content + ' ';
@@ -75,15 +68,7 @@
       groupOrder: "content", // groupOrder can be a property name or a sorting function
       selectable: true,
       editable: true,
-      onInitialDrawComplete: function() {
-        myArrow2.drawDependencies();
-        myArrow2.timeline.on("changed", () => {
-          myArrow2.drawDependencies();
-          
-        }); //NOTE: We hijack the on "changed" event to draw the arrow.
-      },
-      //verticalScroll: true,
-      groupTemplate: function(group) { //Con esto añadimos el boton de ocultar en los grupos
+      groupTemplate: function(group) { //function to hide groups
         var container = document.createElement('div');
         var label = document.createElement('span');
         label.innerHTML = group.content + ' ';
@@ -138,9 +123,8 @@
 
 
 
-    /* SINCRONIZACION DEL MOVIMIENTO DE LAS TIMELINES */
+    /* SYNCHRONIZATION OF MOVEMENT OF BOTH TIMELINES */
 
-      //Eventos y Funciones que sincronizan el movimiento de ambas timeLines
       timelineplus2.on('rangechange', function () {
         onrangechange2();
       });
@@ -159,42 +143,28 @@
 
 
       /**
-      *CREATING THE ARROWS 
+      *CREATING 2 ARRAYS OF ARROWS 
       */    
-
-      /**
-       * dependency quiero que sea un array de objetos:
-       *  {
-       *    id,
-       *    id_item_1,
-       *    id_item_2,
-       *    descripcion   
-       *  }
-       */
       var dependency = [
         {
           id: 2,
           id_item_1: 1,
-          id_item_2: 2,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 2
         },
         {
           id: 5,
           id_item_1: 3,
-          id_item_2: 5,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 5
         },
         {
           id: 7,
           id_item_1: 6,
-          id_item_2: 7,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 7
         },
         {
           id: 10,
           id_item_1: 3,
-          id_item_2: 8,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 8 
         }
       ];
 
@@ -204,26 +174,22 @@
         {
           id: 2,
           id_item_1: 1,
-          id_item_2: 2,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 2
         },
         {
           id: 5,
           id_item_1: 3,
-          id_item_2: 5,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 5
         },
         {
           id: 7,
           id_item_1: 6,
-          id_item_2: 7,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 7
         },
         {
           id: 10,
           id_item_1: 3,
-          id_item_2: 8,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 8
         }
       ];
 
@@ -233,24 +199,21 @@
 
       const myArrow2 = new Arrow(timelineplus2, dependency2);
 
-      //Ejemplo de añadir nueva flecha (entre items 15 y 16)
-      //myArrow.addArrow([15,16]);
+      //Example of adding a new arrow (between items 15 and 16)
       myArrow.addArrow(
         {
           id: 13,
           id_item_1: 15,
-          id_item_2: 16,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 16 
         }
       );
 
 
       
 
-      /*OTROS FUNCIONES SIN IMPOSTANCIA*/
+      /*ANOTHER FUNCTIONS (NO IMPORTANT)*/
       function showVisibleItems() {
         var a = timelineplus.getVisibleItems();
-        //console.log(a);
         document.getElementById("visibleItemsContainer").innerHTML = ""
         document.getElementById("visibleItemsContainer").innerHTML += a;
       };
@@ -261,6 +224,6 @@
         })
       };
 
-      function elimina () {
+      function remove () {
         myArrow.removeArrow(10);
       }
