@@ -7,7 +7,7 @@ Following the issue of vis https://github.com/almende/vis/issues/1699, and thank
 
 ## Install & initialize
 
-1 - Download the arrow.js file and load it in your html.
+1 - Download the [arrow.js file](https://github.com/javdome/timeline-arrows/blob/master/arrow.js) and load it in your html.
 
 For instance:
 
