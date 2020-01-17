@@ -82,7 +82,9 @@ class Arrow {
 
     drawArrows(dep, index) {
         //Checks if both items exist
-        if( (typeof this.timeline.itemsData._data[dep.id_item_1] !== "undefined") && (typeof this.timeline.itemsData._data[dep.id_item_2] !== "undefined") ) {
+        //if( (typeof this.timeline.itemsData._data[dep.id_item_1] !== "undefined") && (typeof this.timeline.itemsData._data[dep.id_item_2] !== "undefined") ) {
+        //debugger;
+        if( (this.timeline.itemsData.get(dep.id_item_1) !== null) && (this.timeline.itemsData.get(dep.id_item_2) !== null) ) {
             var bothItemsExist = true;
         } else {
             var bothItemsExist = false;
@@ -101,18 +103,18 @@ class Arrow {
             var groupOf_1_isVisible = false; //Iniciamos a false
             var groupOf_2_isVisible = false; //Iniciamos a false
             
-            let groupOf_1 = this.timeline.itemsData._data[dep.id_item_1].group; //let groupOf_1 = items.get(dep.id_item_1).group;
+            let groupOf_1 = this.timeline.itemsData.get(dep.id_item_1).group; //let groupOf_1 = items.get(dep.id_item_1).group;
             
-            let groupOf_2 = this.timeline.itemsData._data[dep.id_item_2].group; //let groupOf_2 = items.get(dep.id_item_2).group;
+            let groupOf_2 = this.timeline.itemsData.get(dep.id_item_2).group; //let groupOf_2 = items.get(dep.id_item_2).group;
             
-            if ( this.timeline.groupsData._data._data[groupOf_1].hasOwnProperty('visible') ) {
-                var groupOf_1_isVisible = this.timeline.groupsData._data._data[groupOf_1].visible;
+            if ( this.timeline.groupsData._data.get(groupOf_1).hasOwnProperty('visible') ) {
+                var groupOf_1_isVisible = this.timeline.groupsData._data.get(groupOf_1).visible;
             } else {
                 var groupOf_1_isVisible = true;
             }
 
-            if ( this.timeline.groupsData._data._data[groupOf_2].hasOwnProperty('visible') ) {
-                var groupOf_2_isVisible = this.timeline.groupsData._data._data[groupOf_2].visible;
+            if ( this.timeline.groupsData._data.get(groupOf_2).hasOwnProperty('visible') ) {
+                var groupOf_2_isVisible = this.timeline.groupsData._data.get(groupOf_2).visible;
             } else {
                 var groupOf_2_isVisible = true;
             }

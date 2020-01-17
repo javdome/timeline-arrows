@@ -30,12 +30,12 @@
       var names = ["John", "Alston", "Lee", "Grant"];
       var itemCount = 20;
       // create a data set with groups
-      var groups = new timeline.DataSet();
+      var groups = new vis.DataSet();
       for (var g = 0; g < names.length; g++) {
         groups.add({ id: g, content: names[g] });
       }
       // create a dataset with items
-      var items = new timeline.DataSet();
+      var items = new vis.DataSet();
       for (var i = 0; i < itemCount; i++) {
         var start = now.clone().add(Math.random() * 200, "hours");
         var end = start + 100000000;
@@ -56,7 +56,7 @@
       }
       // Create visualization.
       const container = document.getElementById("visualization");
-      const timelineplus = new timeline.Timeline(container, items, groups, options);
+      const timelinevis = new vis.Timeline(container, items, groups, options);
 
 
 
@@ -97,7 +97,7 @@
 
  
       // Create instance of Arrow for a timeline objetc and its denpedencies
-      const myArrow = new Arrow(timelineplus, dependency);
+      const myArrow = new Arrow(timelinevis, dependency);
 
       
 
@@ -116,7 +116,7 @@
 
       /*ANOTHER FUNCTIONS (NO IMPORTANT)*/
       function showVisibleItems() {
-        var a = timelineplus.getVisibleItems();
+        var a = timelinevis.getVisibleItems();
         document.getElementById("visibleItemsContainer").innerHTML = ""
         document.getElementById("visibleItemsContainer").innerHTML += a;
       };
