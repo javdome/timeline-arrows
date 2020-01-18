@@ -30,12 +30,12 @@
       var names = ["John", "Alston", "Lee", "Grant"];
       var itemCount = 20;
       // create a data set with groups
-      var groups = new timeline.DataSet();
+      var groups = new vis.DataSet();
       for (var g = 0; g < names.length; g++) {
         groups.add({ id: g, content: names[g] });
       }
       // create a dataset with items
-      var items = new timeline.DataSet();
+      var items = new vis.DataSet();
       for (var i = 0; i < itemCount; i++) {
         var start = now.clone().add(Math.random() * 200, "hours");
         var end = start + 100000000;
@@ -56,7 +56,7 @@
       }
       // Create visualization.
       const container = document.getElementById("visualization");
-      const timelineplus = new timeline.Timeline(container, items, groups, options);
+      const timelinevis = new vis.Timeline(container, items, groups, options);
 
 
 
@@ -92,12 +92,12 @@
     var names2 = ["Juan", "Alfredo", "Luis", "David"];
     var itemCount2 = 20;
     // create a data set with groups
-    var groups2 = new timeline.DataSet();
+    var groups2 = new vis.DataSet();
     for (var g = 0; g < names2.length; g++) {
       groups2.add({ id: g, content: names2[g] });
     }
     // create a dataset with items
-    var items2 = new timeline.DataSet();
+    var items2 = new vis.DataSet();
     for (var i = 0; i < itemCount2; i++) {
       var start = now2.clone().add(Math.random() * 200, "hours");
       var end = start + 100000000;
@@ -118,26 +118,26 @@
     }
     // Create visualization.
     const container2 = document.getElementById("visualization2");
-    const timelineplus2 = new timeline.Timeline(container2, items2, groups2, options2);
+    const timelinevis2 = new vis.Timeline(container2, items2, groups2, options2);
 
 
 
 
     /* SYNCHRONIZATION OF MOVEMENT OF BOTH TIMELINES */
 
-      timelineplus2.on('rangechange', function () {
+      timelinevis2.on('rangechange', function () {
         onrangechange2();
       });
-      timelineplus.on('rangechange', function () {
+      timelinevis.on('rangechange', function () {
         onrangechange1();
       });
       function onrangechange1() {
-        var range = timelineplus.getWindow();
-        timelineplus2.setWindow(range.start, range.end, {animation: false});
+        var range = timelinevis.getWindow();
+        timelinevis2.setWindow(range.start, range.end, {animation: false});
       }
       function onrangechange2() {
-        var range = timelineplus2.getWindow();
-        timelineplus.setWindow(range.start, range.end, {animation: false});
+        var range = timelinevis2.getWindow();
+        timelinevis.setWindow(range.start, range.end, {animation: false});
       }
 
 
@@ -195,9 +195,9 @@
 
  
       // Create instance of Arrow for a timeline objetc and its denpedencies
-      const myArrow = new Arrow(timelineplus, dependency);
+      const myArrow = new Arrow(timelinevis, dependency);
 
-      const myArrow2 = new Arrow(timelineplus2, dependency2);
+      const myArrow2 = new Arrow(timelinevis2, dependency2);
 
       //Example of adding a new arrow (between items 15 and 16)
       myArrow.addArrow(
@@ -213,7 +213,7 @@
 
       /*ANOTHER FUNCTIONS (NO IMPORTANT)*/
       function showVisibleItems() {
-        var a = timelineplus.getVisibleItems();
+        var a = timelinevis.getVisibleItems();
         document.getElementById("visibleItemsContainer").innerHTML = ""
         document.getElementById("visibleItemsContainer").innerHTML += a;
       };
