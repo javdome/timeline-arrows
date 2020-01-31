@@ -71,25 +71,23 @@
           id: 2,
           id_item_1: 1,
           id_item_2: 2,
-          descripcion: 'Hola Rafa'   
+          title: 'Hello'   
         },
         {
           id: 5,
           id_item_1: 3,
-          id_item_2: 5,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 5 
         },
         {
           id: 7,
           id_item_1: 6,
           id_item_2: 7,
-          descripcion: 'Hola Rafa'   
+          title: 'Hola'   
         },
         {
           id: 10,
           id_item_1: 3,
-          id_item_2: 8,
-          descripcion: 'Hola Rafa'   
+          id_item_2: 8
         }
       ];
 
@@ -107,7 +105,7 @@
           id: 13,
           id_item_1: 15,
           id_item_2: 16,
-          descripcion: 'Hola Rafa'   
+          title: 'I have been added'   
         }
       );
 

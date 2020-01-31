@@ -67,6 +67,7 @@ class Arrow {
           somePath.style.stroke = "#F00";
           somePath.style.strokeWidth = "3px";
           somePath.style.fill = "none";
+          somePath.style.pointerEvents = "auto";
           this.dependencyPath.push(somePath);
           this.svg.appendChild(somePath);
     }
@@ -146,6 +147,10 @@ class Arrow {
                 " " +
                 item_2.mid_y
             );
+            // Adding the title if property title has been added in the dependency
+            if (dep.hasOwnProperty("title")) {
+                this.dependencyPath[index].innerHTML = "<title>" +dep.title +"</title>"
+            }
         } else {
             this.dependencyPath[index].setAttribute("marker-end", "");
             this.dependencyPath[index].setAttribute("d", "M 0 0");

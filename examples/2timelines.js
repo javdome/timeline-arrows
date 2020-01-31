@@ -149,7 +149,8 @@
         {
           id: 2,
           id_item_1: 1,
-          id_item_2: 2
+          id_item_2: 2,
+          title: 'Hola'
         },
         {
           id: 5,
@@ -159,7 +160,8 @@
         {
           id: 7,
           id_item_1: 6,
-          id_item_2: 7
+          id_item_2: 7,
+          title: 'Hello'
         },
         {
           id: 10,
@@ -174,7 +176,8 @@
         {
           id: 2,
           id_item_1: 1,
-          id_item_2: 2
+          id_item_2: 2,
+          title: 'Hola 2'
         },
         {
           id: 5,
@@ -184,7 +187,8 @@
         {
           id: 7,
           id_item_1: 6,
-          id_item_2: 7
+          id_item_2: 7,
+          title: 'Hello 2'
         },
         {
           id: 10,

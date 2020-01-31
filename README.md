@@ -29,14 +29,17 @@ const my_timeline = new vis.Timeline(container, items, groups, options);
 * id_item_1 (id of one timeline's items)
 * id_item_2 (id of the other timeline's items that you want to connect with)
 
+And optionally:
+* title (insert a text and it will show a title if you hover the mouse in the arrow)
+
 For instance:
 
 ```
 var arrows_array = [
     { id: 2, id_item_1: 1, id_item_2: 2 },
-    { id: 5, id_item_1: 3, id_item_2: 5 },
+    { id: 5, id_item_1: 3, id_item_2: 5, title:'Hello!!!' },
     { id: 7, id_item_1: 6, id_item_2: 7 },
-    { id: 10, id_item_1: 3, id_item_2: 8 }
+    { id: 10, id_item_1: 3, id_item_2: 8, title:'I am a title!!!' }
 ];
 ```
 
