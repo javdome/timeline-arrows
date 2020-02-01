@@ -174,12 +174,20 @@ class Arrow {
         }
     }
 
-    
+
     addArrow (dep) {
         this._dependency.push(dep);
         this._createPath();
     }
 
+    getArrow (id) {
+        for (let i = 0; i < this._dependency.length; i++) {
+            if (this._dependency[i].id == id) {
+                return this._dependency[i];
+            }
+        }
+        return null;
+    }
     
     //Función que recibe el id de una flecha y la elimina.
     removeArrow(id) {

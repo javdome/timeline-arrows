@@ -58,6 +58,13 @@ That's it :)
 
 I have created the following methods:
 
+**getArrow ( *arrow id* )**  Returns the arrow whith this arrow_id.
+
+For instance:
+```
+my_Arrow.getArrow (2);
+```
+
 **addArrow ( *arrow object* )**  Inserts a new arrow.
 
 For instance:
