@@ -1,3 +1,29 @@
+/**
+ * timeline-arrows
+ * https://github.com/javdome/timeline-arrows
+ *
+ * Class to easily draw lines to connect items in the vis Timeline module.
+ *
+ * @version 2.2.1
+ * @date    2020-02-01
+ *
+ * @copyright (c) Javi Domenech (javdome@gmail.com) 
+ *
+ *
+ * @license
+ * timeline-arrows is dual licensed under both
+ *
+ *   1. The Apache 2.0 License
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   and
+ *
+ *   2. The MIT License
+ *      http://opensource.org/licenses/MIT
+ *
+ * timeline-arrows may be distributed under either license.
+ */
+
 class Arrow {
 
     constructor(timeline, dependencies) {
