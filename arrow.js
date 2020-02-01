@@ -1,63 +1,63 @@
 class Arrow {
 
     constructor(timeline, dependencies) {
-        this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        this.timeline = timeline;
+        this._svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        this._timeline = timeline;
 
-        this.arrowHead = document.createElementNS(
+        this._arrowHead = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "marker"
         );
-        this.arrowHeadPath = document.createElementNS(
+        this._arrowHeadPath = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "path"
         );
         
-        this.dependency = dependencies;
+        this._dependency = dependencies;
 
-        this.dependencyPath = [];
+        this._dependencyPath = [];
 
-        this.initialize();
+        this._initialize();
     }
   
-    initialize() {
+    _initialize() {
         //Configures the SVG layer and add it to timeline
-        this.svg.style.position = "absolute";
-        this.svg.style.top = "0px";
-        this.svg.style.height = "100%";
-        this.svg.style.width = "100%";
-        this.svg.style.display = "block";
-        this.svg.style.zIndex = "1"; // Should it be above or below? (1 for above, -1 for below)
-        this.svg.style.pointerEvents = "none"; // To click through, if we decide to put it above other elements.
-        this.timeline.dom.center.appendChild(this.svg);
+        this._svg.style.position = "absolute";
+        this._svg.style.top = "0px";
+        this._svg.style.height = "100%";
+        this._svg.style.width = "100%";
+        this._svg.style.display = "block";
+        this._svg.style.zIndex = "1"; // Should it be above or below? (1 for above, -1 for below)
+        this._svg.style.pointerEvents = "none"; // To click through, if we decide to put it above other elements.
+        this._timeline.dom.center.appendChild(this._svg);
 
         //Configure the arrowHead
-        this.arrowHead.setAttribute("id", "arrowhead0");
-        this.arrowHead.setAttribute("viewBox", "-10 -5 10 10");
-        this.arrowHead.setAttribute("refX", "-7");
-        this.arrowHead.setAttribute("refY", "0");
-        this.arrowHead.setAttribute("markerUnits", "strokeWidth");
-        this.arrowHead.setAttribute("markerWidth", "3");
-        this.arrowHead.setAttribute("markerHeight", "3");
-        this.arrowHead.setAttribute("orient", "auto");
+        this._arrowHead.setAttribute("id", "arrowhead0");
+        this._arrowHead.setAttribute("viewBox", "-10 -5 10 10");
+        this._arrowHead.setAttribute("refX", "-7");
+        this._arrowHead.setAttribute("refY", "0");
+        this._arrowHead.setAttribute("markerUnits", "strokeWidth");
+        this._arrowHead.setAttribute("markerWidth", "3");
+        this._arrowHead.setAttribute("markerHeight", "3");
+        this._arrowHead.setAttribute("orient", "auto");
         //Configure the path of the arrowHead (arrowHeadPath)
-        this.arrowHeadPath.setAttribute("d", "M 0 0 L -10 -5 L -7.5 0 L -10 5 z");
-        this.arrowHeadPath.style.fill = "#F00";
-        this.arrowHead.appendChild(this.arrowHeadPath);
-        this.svg.appendChild(this.arrowHead);
+        this._arrowHeadPath.setAttribute("d", "M 0 0 L -10 -5 L -7.5 0 L -10 5 z");
+        this._arrowHeadPath.style.fill = "#F00";
+        this._arrowHead.appendChild(this._arrowHeadPath);
+        this._svg.appendChild(this._arrowHead);
         //Create paths for the started dependency array
-        for (let i = 0; i < this.dependency.length; i++) {
-            this.createPath();
+        for (let i = 0; i < this._dependency.length; i++) {
+            this._createPath();
         }
         
         //NOTE: We hijack the on "changed" event to draw the arrows.
-        this.timeline.on("changed", () => {
-            this.drawDependencies();
+        this._timeline.on("changed", () => {
+            this._drawDependencies();
         });
 
     }
     
-    createPath(){
+    _createPath(){
         //Add a new path to array dependencyPath and to svg
         let somePath = document.createElementNS(
             "http://www.w3.org/2000/svg",
@@ -68,24 +68,24 @@ class Arrow {
           somePath.style.strokeWidth = "3px";
           somePath.style.fill = "none";
           somePath.style.pointerEvents = "auto";
-          this.dependencyPath.push(somePath);
-          this.svg.appendChild(somePath);
+          this._dependencyPath.push(somePath);
+          this._svg.appendChild(somePath);
     }
 
     
 
-    drawDependencies() {
+    _drawDependencies() {
         //Create paths for the started dependency array
-        for (let i = 0; i < this.dependency.length; i++) {
-            this.drawArrows(this.dependency[i], i);
+        for (let i = 0; i < this._dependency.length; i++) {
+            this._drawArrows(this._dependency[i], i);
         }
     }
 
-    drawArrows(dep, index) {
+    _drawArrows(dep, index) {
         //Checks if both items exist
-        //if( (typeof this.timeline.itemsData._data[dep.id_item_1] !== "undefined") && (typeof this.timeline.itemsData._data[dep.id_item_2] !== "undefined") ) {
+        //if( (typeof this._timeline.itemsData._data[dep.id_item_1] !== "undefined") && (typeof this._timeline.itemsData._data[dep.id_item_2] !== "undefined") ) {
         //debugger;
-        if( (this.timeline.itemsData.get(dep.id_item_1) !== null) && (this.timeline.itemsData.get(dep.id_item_2) !== null) ) {
+        if( (this._timeline.itemsData.get(dep.id_item_1) !== null) && (this._timeline.itemsData.get(dep.id_item_2) !== null) ) {
             var bothItemsExist = true;
         } else {
             var bothItemsExist = false;
@@ -94,7 +94,7 @@ class Arrow {
         //Checks if at least one item is visible in screen
         var oneItemVisible = false; //Iniciamos a false
         if (bothItemsExist) {    
-            var visibleItems = this.timeline.getVisibleItems();
+            var visibleItems = this._timeline.getVisibleItems();
             for (let k = 0; k < visibleItems.length ; k++) {
                 if (dep.id_item_1 == visibleItems[k]) oneItemVisible = true;
                 if (dep.id_item_2 == visibleItems[k]) oneItemVisible = true;
@@ -104,31 +104,31 @@ class Arrow {
             var groupOf_1_isVisible = false; //Iniciamos a false
             var groupOf_2_isVisible = false; //Iniciamos a false
             
-            let groupOf_1 = this.timeline.itemsData.get(dep.id_item_1).group; //let groupOf_1 = items.get(dep.id_item_1).group;
+            let groupOf_1 = this._timeline.itemsData.get(dep.id_item_1).group; //let groupOf_1 = items.get(dep.id_item_1).group;
             
-            let groupOf_2 = this.timeline.itemsData.get(dep.id_item_2).group; //let groupOf_2 = items.get(dep.id_item_2).group;
+            let groupOf_2 = this._timeline.itemsData.get(dep.id_item_2).group; //let groupOf_2 = items.get(dep.id_item_2).group;
             
-            if ( this.timeline.groupsData._data.get(groupOf_1).hasOwnProperty('visible') ) {
-                var groupOf_1_isVisible = this.timeline.groupsData._data.get(groupOf_1).visible;
+            if ( this._timeline.groupsData._data.get(groupOf_1).hasOwnProperty('visible') ) {
+                var groupOf_1_isVisible = this._timeline.groupsData._data.get(groupOf_1).visible;
             } else {
                 var groupOf_1_isVisible = true;
             }
 
-            if ( this.timeline.groupsData._data.get(groupOf_2).hasOwnProperty('visible') ) {
-                var groupOf_2_isVisible = this.timeline.groupsData._data.get(groupOf_2).visible;
+            if ( this._timeline.groupsData._data.get(groupOf_2).hasOwnProperty('visible') ) {
+                var groupOf_2_isVisible = this._timeline.groupsData._data.get(groupOf_2).visible;
             } else {
                 var groupOf_2_isVisible = true;
             }
         }
 
         if ( (groupOf_1_isVisible && groupOf_2_isVisible) && (oneItemVisible) && (bothItemsExist)) {
-            var item_1 = this.getItemPos(this.timeline.itemSet.items[dep.id_item_1]);
-            var item_2 = this.getItemPos(this.timeline.itemSet.items[dep.id_item_2]);
+            var item_1 = this._getItemPos(this._timeline.itemSet.items[dep.id_item_1]);
+            var item_2 = this._getItemPos(this._timeline.itemSet.items[dep.id_item_2]);
             if (item_2.mid_x < item_1.mid_x) [item_1, item_2] = [item_2, item_1]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
             var curveLen = item_1.height * 2; // Length of straight Bezier segment out of the item.
             item_2.left -= 10; // Space for the arrowhead.
-            this.dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
-            this.dependencyPath[index].setAttribute(
+            this._dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
+            this._dependencyPath[index].setAttribute(
             "d",
             "M " +
                 item_1.right +
@@ -149,22 +149,17 @@ class Arrow {
             );
             // Adding the title if property title has been added in the dependency
             if (dep.hasOwnProperty("title")) {
-                this.dependencyPath[index].innerHTML = "<title>" +dep.title +"</title>"
+                this._dependencyPath[index].innerHTML = "<title>" +dep.title +"</title>"
             }
         } else {
-            this.dependencyPath[index].setAttribute("marker-end", "");
-            this.dependencyPath[index].setAttribute("d", "M 0 0");
+            this._dependencyPath[index].setAttribute("marker-end", "");
+            this._dependencyPath[index].setAttribute("d", "M 0 0");
         }
 
     }
 
-    addArrow (dep) {
-        this.dependency.push(dep);
-        this.createPath();
-    }
-
     //Función que recibe in Item y devuelve la posición en pantalla del item.
-    getItemPos (item) {
+    _getItemPos (item) {
         let left_x = item.left;
         let top_y = item.parent.top + item.parent.height - item.top - item.height;
         return {
@@ -178,26 +173,33 @@ class Arrow {
             height: item.height
         }
     }
+
+    
+    addArrow (dep) {
+        this._dependency.push(dep);
+        this._createPath();
+    }
+
     
     //Función que recibe el id de una flecha y la elimina.
     removeArrow(id) {
-        for (let i = 0; i < this.dependency.length; i++) {
-            if (this.dependency[i].id == id) var index = i;
+        for (let i = 0; i < this._dependency.length; i++) {
+            if (this._dependency[i].id == id) var index = i;
         }
 
         //var list = document.getElementsByTagName("path"); //FALTA QUE ESTA SELECCION LA HAGA PARA EL DOM DEL TIMELINE INSTANCIADO!!!!
-        var list = document.querySelectorAll("#" +this.timeline.dom.container.id +" path");
+        var list = document.querySelectorAll("#" +this._timeline.dom.container.id +" path");
 
-        this.dependency.splice(index, 1); //Elimino del array dependency
-        this.dependencyPath.splice(index, 1); //Elimino del array dependencyPath
+        this._dependency.splice(index, 1); //Elimino del array dependency
+        this._dependencyPath.splice(index, 1); //Elimino del array dependencyPath
         
         list[index + 1].parentNode.removeChild(list[index + 1]); //Lo elimino del dom
     }
 
     //Función que recibe el id de un item y elimina la flecha.
     removeArrowbyItemId(id) {
-        for (let i = 0; i < this.dependency.length; i++) {
-            if ( (this.dependency[i].id_item_1 == id) || (this.dependency[i].id_item_2 == id) ) this.removeArrow(this.dependency[i].id);
+        for (let i = 0; i < this._dependency.length; i++) {
+            if ( (this._dependency[i].id_item_1 == id) || (this._dependency[i].id_item_2 == id) ) this.removeArrow(this._dependency[i].id);
         }
     }
 
