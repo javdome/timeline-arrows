@@ -4,7 +4,7 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 2.2.2
+ * @version 2.2.3
  * @date    2020-02-03
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
@@ -212,6 +212,7 @@ class Arrow {
     addArrow (dep) {
         this._dependency.push(dep);
         this._createPath();
+        this._timeline.redraw();
     }
 
     getArrow (id) {
@@ -241,7 +242,10 @@ class Arrow {
     //Función que recibe el id de un item y elimina la flecha.
     removeArrowbyItemId(id) {
         for (let i = 0; i < this._dependency.length; i++) {
-            if ( (this._dependency[i].id_item_1 == id) || (this._dependency[i].id_item_2 == id) ) this.removeArrow(this._dependency[i].id);
+            if ( (this._dependency[i].id_item_1 == id) || (this._dependency[i].id_item_2 == id) ) {
+                this.removeArrow(this._dependency[i].id);
+                i--;
+            } 
         }
     }
 
