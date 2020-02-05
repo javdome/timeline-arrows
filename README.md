@@ -79,7 +79,7 @@ For instance:
 my_Arrow.removeArrow ( 10 );
 ```
 
-**removeArrowbyItemId ( *item_Id* )**   Removes the arrows connected with Items with this item_Id.
+**removeArrowbyItemId ( *item_Id* )**   Removes the arrows connected with Items with this item_Id. Returns an array with the id's of the removed arrows.
 
 For instance:
 ```
