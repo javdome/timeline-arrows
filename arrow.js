@@ -4,8 +4,8 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 2.2.3
- * @date    2020-02-03
+ * @version 2.3
+ * @date    2020-02-05
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
  *
@@ -68,7 +68,7 @@ class Arrow {
         this._arrowHead.setAttribute("orient", "auto");
         //Configure the path of the arrowHead (arrowHeadPath)
         this._arrowHeadPath.setAttribute("d", "M 0 0 L -10 -5 L -7.5 0 L -10 5 z");
-        this._arrowHeadPath.style.fill = "#F00";
+        this._arrowHeadPath.style.fill = "#9c0000";
         this._arrowHead.appendChild(this._arrowHeadPath);
         this._svg.appendChild(this._arrowHead);
         //Create paths for the started dependency array
@@ -90,7 +90,7 @@ class Arrow {
             "path"
           );
           somePath.setAttribute("d", "M 0 0");
-          somePath.style.stroke = "#F00";
+          somePath.style.stroke = "#9c0000";
           somePath.style.strokeWidth = "3px";
           somePath.style.fill = "none";
           somePath.style.pointerEvents = "auto";
@@ -241,12 +241,15 @@ class Arrow {
 
     //Función que recibe el id de un item y elimina la flecha.
     removeArrowbyItemId(id) {
+        let listOfRemovedArrows = [];
         for (let i = 0; i < this._dependency.length; i++) {
             if ( (this._dependency[i].id_item_1 == id) || (this._dependency[i].id_item_2 == id) ) {
+                listOfRemovedArrows.push(this._dependency[i].id);
                 this.removeArrow(this._dependency[i].id);
                 i--;
             } 
         }
+        return listOfRemovedArrows;
     }
 
 
