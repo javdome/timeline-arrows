@@ -134,17 +134,10 @@ class Arrow {
             
             let groupOf_2 = this._timeline.itemsData.get(dep.id_item_2).group; //let groupOf_2 = items.get(dep.id_item_2).group;
                        
-            if ( this._timeline.groupsData.get(groupOf_1).hasOwnProperty('visible') ) {
-                var groupOf_1_isVisible = this._timeline.groupsData.get(groupOf_1).visible;
-            } else {
-                var groupOf_1_isVisible = true;
-            }
+            if ( this._timeline.groupsData.get(groupOf_1) ) groupOf_1_isVisible = true;
 
-            if ( this._timeline.groupsData.get(groupOf_2).hasOwnProperty('visible') ) {
-                var groupOf_2_isVisible = this._timeline.groupsData.get(groupOf_2).visible;
-            } else {
-                var groupOf_2_isVisible = true;
-            }
+            if ( this._timeline.groupsData.get(groupOf_2) ) groupOf_2_isVisible = true;
+            
 
             // If groups are null then they are not visible.
             if (groupOf_1 == null){
