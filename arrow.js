@@ -4,7 +4,7 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 3.0
+ * @version 3.0.1
  * @date    2020-11-06
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
@@ -137,7 +137,7 @@ class Arrow {
             if ( this._timeline.groupsData.get(groupOf_1) ) groupOf_1_isVisible = true;
 
             if ( this._timeline.groupsData.get(groupOf_2) ) groupOf_2_isVisible = true;
-            
+
 
             // If groups are null then they are not visible.
             if (groupOf_1 == null){
