@@ -1,0 +1,23 @@
+{
+  "name": "timeline-arrows",
+  "version": "3.1.0",
+  "description": "Package to easily draw lines to connect items in the vis Timeline module.",
+  "main": "arrow.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javdome/timeline-arrows.git"
+  },
+  "keywords": [
+    "vis",
+    "vis-timeline"
+  ],
+  "author": "Javi Domenech",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/javdome/timeline-arrows/issues"
+  },
+  "homepage": "https://github.com/javdome/timeline-arrows#readme"
+}

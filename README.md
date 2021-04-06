@@ -7,15 +7,19 @@ Following the issue of vis https://github.com/almende/vis/issues/1699, and thank
 
 ## Install & initialize
 
-1 - Download the [arrow.js file](https://github.com/javdome/timeline-arrows/blob/master/arrow.js) and load it in your html.
-
-For instance:
+1 - Download the package
 
 ```
-<script src="./arrow.js"></script>
+npm install timeline-arrows
 ```
 
-2 - Create your timeline as usual (see [vis-timeline docs](https://visjs.github.io/vis-timeline/docs/timeline/)).
+2 - Import the class in your project
+
+```
+import Arrow from 'timeline-arrows'
+```
+
+3 - Create your timeline as usual (see [vis-timeline docs](https://visjs.github.io/vis-timeline/docs/timeline/)).
 
 For instance:
 
@@ -24,7 +28,7 @@ const my_timeline = new vis.Timeline(container, items, groups, options);
 ```
 
 
-3 - Create your arrows as an array of objects. These objets must have, at least, the following properties:
+4 - Create your arrows as an array of objects. These objets must have, at least, the following properties:
 * id
 * id_item_1 (id of one timeline's items)
 * id_item_2 (id of the other timeline's items that you want to connect with)
@@ -43,7 +47,7 @@ var arrows_array = [
 ];
 ```
 
-4 - Create your Arrow instance for your timeline and your arrows.
+5 - Create your Arrow instance for your timeline and your arrows.
 
 For instance:
 

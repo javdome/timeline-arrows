@@ -1,6 +1,7 @@
       /**
       *CREATING THE TIMELINE 
       */
+      import Arrow from '../arrow.js';
 
       const options = {
         groupOrder: "content", // groupOrder can be a property name or a sorting function

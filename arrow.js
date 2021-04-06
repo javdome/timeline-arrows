@@ -4,8 +4,8 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 3.0.1
- * @date    2020-11-06
+ * @version 3.1.0
+ * @date    2021-04-06
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
  *
@@ -24,7 +24,7 @@
  * timeline-arrows may be distributed under either license.
  */
 
-class Arrow {
+export default class Arrow {
 
     constructor(timeline, dependencies) {
         this._svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
