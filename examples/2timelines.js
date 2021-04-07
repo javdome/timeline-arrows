@@ -1,7 +1,7 @@
       /**
       *CREATING THE TIMELINE 1
       */
-      import Arrow from 'timeline-arrows';
+      import Arrow from '../arrow.js';
 
 
       const options = {

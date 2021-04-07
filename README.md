@@ -13,11 +13,8 @@ Following the issue of vis https://github.com/almende/vis/issues/1699, and thank
 npm install timeline-arrows
 ```
 
-2 - Import the class in your project
+2 - Import the class `Arrow` from `arrow.js` in your project
 
-```
-import Arrow from 'timeline-arrows'
-```
 
 3 - Create your timeline as usual (see [vis-timeline docs](https://visjs.github.io/vis-timeline/docs/timeline/)).
 
