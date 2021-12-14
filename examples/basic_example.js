@@ -114,18 +114,21 @@
       
 
       /*ANOTHER FUNCTIONS (NO IMPORTANT)*/
-      function showVisibleItems() {
+      const showVisibleItems = function () {
         var a = timelinevis.getVisibleItems();
         document.getElementById("visibleItemsContainer").innerHTML = ""
         document.getElementById("visibleItemsContainer").innerHTML += a;
       };
+      Window.showVisibleItems = showVisibleItems;
 
-      function showGroups (){
+      const showGroups = function (){
         groups.forEach(function(group){
           groups.update({id: group.id, visible: true});
         })
       };
+      Window.showGroups = showGroups;
 
-      function remove () {
+      const remove = function () {
         myArrow.removeArrow(10);
       }
+      Window.remove = remove;
