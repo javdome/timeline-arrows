@@ -26,9 +26,11 @@
 
 export default class Arrow {
 
-    constructor(timeline, dependencies) {
+    constructor(timeline, dependencies, options) {
         this._svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this._timeline = timeline;
+
+        this._followRelationships = options?.followRelationships;
 
         this._arrowHead = document.createElementNS(
             "http://www.w3.org/2000/svg",
@@ -65,7 +67,7 @@ export default class Arrow {
         this._arrowHead.setAttribute("markerUnits", "strokeWidth");
         this._arrowHead.setAttribute("markerWidth", "3");
         this._arrowHead.setAttribute("markerHeight", "3");
-        this._arrowHead.setAttribute("orient", "auto");
+        this._arrowHead.setAttribute("orient", "auto-start-reverse");
         //Configure the path of the arrowHead (arrowHeadPath)
         this._arrowHeadPath.setAttribute("d", "M 0 0 L -10 -5 L -7.5 0 L -10 5 z");
         this._arrowHeadPath.style.fill = "#9c0000";
@@ -151,29 +153,59 @@ export default class Arrow {
         if ( (groupOf_1_isVisible && groupOf_2_isVisible) && (oneItemVisible) && (bothItemsExist)) {
             var item_1 = this._getItemPos(this._timeline.itemSet.items[dep.id_item_1]);
             var item_2 = this._getItemPos(this._timeline.itemSet.items[dep.id_item_2]);
-            if (item_2.mid_x < item_1.mid_x) [item_1, item_2] = [item_2, item_1]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
+
+            if (!this._followRelationships && item_2.mid_x < item_1.mid_x) {
+                [item_1, item_2] = [item_2, item_1]; // As demo, we put an arrow between item 0 and item1, from the one that is more on left to the one more on right.
+            }
+
             var curveLen = item_1.height * 2; // Length of straight Bezier segment out of the item.
-            item_2.left -= 10; // Space for the arrowhead.
-            this._dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
-            this._dependencyPath[index].setAttribute(
-            "d",
-            "M " +
-                item_1.right +
-                " " +
-                item_1.mid_y +
-                " C " +
-                (item_1.right + curveLen) +
-                " " +
-                item_1.mid_y +
-                " " +
-                (item_2.left - curveLen) +
-                " " +
-                item_2.mid_y +
-                " " +
-                item_2.left +
-                " " +
-                item_2.mid_y
-            );
+
+            if (this._followRelationships && item_2.mid_x < item_1.mid_x) {
+                item_2.right += 10; // Space for the arrowhead.
+                this._dependencyPath[index].setAttribute("marker-start", "url(#arrowhead0)");
+                this._dependencyPath[index].setAttribute(
+                    "d",
+                    "M " +
+                    item_2.right +
+                    " " +
+                    item_2.mid_y +
+                    " C " +
+                    (item_2.right + curveLen) +
+                    " " +
+                    item_2.mid_y +
+                    " " +
+                    (item_1.left - curveLen) +
+                    " " +
+                    item_1.mid_y +
+                    " " +
+                    item_1.left +
+                    " " +
+                    item_1.mid_y
+                );
+            } else {
+                item_2.left -= 10; // Space for the arrowhead.
+                this._dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
+                this._dependencyPath[index].setAttribute(
+                    "d",
+                    "M " +
+                    item_1.right +
+                    " " +
+                    item_1.mid_y +
+                    " C " +
+                    (item_1.right + curveLen) +
+                    " " +
+                    item_1.mid_y +
+                    " " +
+                    (item_2.left - curveLen) +
+                    " " +
+                    item_2.mid_y +
+                    " " +
+                    item_2.left +
+                    " " +
+                    item_2.mid_y
+                );
+            }
+
             // Adding the title if property title has been added in the dependency
             if (dep.hasOwnProperty("title")) {
                 this._dependencyPath[index].innerHTML = "<title>" +dep.title +"</title>"
