@@ -163,6 +163,7 @@ export default class Arrow {
             if (this._followRelationships && item_2.mid_x < item_1.mid_x) {
                 item_2.right += 10; // Space for the arrowhead.
                 this._dependencyPath[index].setAttribute("marker-start", "url(#arrowhead0)");
+                this._dependencyPath[index].setAttribute("marker-end", "");
                 this._dependencyPath[index].setAttribute(
                     "d",
                     "M " +
@@ -185,6 +186,7 @@ export default class Arrow {
             } else {
                 item_2.left -= 10; // Space for the arrowhead.
                 this._dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
+                this._dependencyPath[index].setAttribute("marker-start", "");
                 this._dependencyPath[index].setAttribute(
                     "d",
                     "M " +

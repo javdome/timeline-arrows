@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Timeline | With followRelationships: true</title>
+    <!-- Fuentes de iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+    <style>
+      body,
+      html {
+        font-family: arial, sans-serif;
+        font-size: 11pt;
+      }
+      #visualization {
+        box-sizing: border-box;
+        width: 100%;
+        height: 300px;
+      }
+    </style>
+
+
+    <!-- note: moment.js must be loaded before vis.js, else vis.js uses its embedded version of moment.js -->
+    
+
+    <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <link
+      href="https://unpkg.com/vis-timeline@latest/dist/vis-timeline-graph2d.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <button onclick="Window.showVisibleItems()">Show current visible items</button>
+    <button onclick="Window.showGroups()">Show groups</button>
+    <button onclick="Window.remove()">Delete arrow between 3 and 8</button>
+    <div>
+      <h2>visible items:</h2>
+      <h3 id="visibleItemsContainer"></h3>
+    </div>
+    <div id="visualization"></div>
+
+    
+    <!-- <script src="../arrow.js"></script> -->
+    <script type="module" src="./followRelationships_True.js"></script>
+
+  </body>
+</html>
