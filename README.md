@@ -55,6 +55,22 @@ const my_Arrow = new Arrow(my_timeline, arrows_array);
 That's it :)
 
 
+## Options
+
+Options can be used to customize the arrows. Options are defined as a JSON object. All options are optional.
+
+```
+const options = {
+    followRelationships: true,
+};
+
+const my_Arrow = new Arrow(my_timeline, arrows_array, options);
+```
+
+**followRelationships** - defaults to false.
+If true, arrows can point backwards and will follow the relationships set in the data. If false, arrows will only follow the timeline direction (left to right).
+
+
 ## Methods
 
 I have created the following methods:
