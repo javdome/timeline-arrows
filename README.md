@@ -62,6 +62,7 @@ Options can be used to customize the arrows. Options are defined as a JSON objec
 ```
 const options = {
     followRelationships: true,
+    color: "#039E00"
 };
 
 const my_Arrow = new Arrow(my_timeline, arrows_array, options);
@@ -69,6 +70,9 @@ const my_Arrow = new Arrow(my_timeline, arrows_array, options);
 
 **followRelationships** - defaults to false.
 If true, arrows can point backwards and will follow the relationships set in the data. If false, arrows will only follow the timeline direction (left to right).
+
+**color** - defaults to "#9c0000".
+Sets the arrows color.
 
 
 ## Methods

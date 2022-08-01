@@ -4,8 +4,8 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 3.1.0
- * @date    2021-04-06
+ * @version 4.1.0
+ * @date    2022-08-01
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
  *
@@ -31,6 +31,8 @@ export default class Arrow {
         this._timeline = timeline;
 
         this._followRelationships = options?.followRelationships;
+
+        this._arrowsColor = options?.color ? options.color : "#9c0000"
 
         this._arrowHead = document.createElementNS(
             "http://www.w3.org/2000/svg",
@@ -70,7 +72,7 @@ export default class Arrow {
         this._arrowHead.setAttribute("orient", "auto-start-reverse");
         //Configure the path of the arrowHead (arrowHeadPath)
         this._arrowHeadPath.setAttribute("d", "M 0 0 L -10 -5 L -7.5 0 L -10 5 z");
-        this._arrowHeadPath.style.fill = "#9c0000";
+        this._arrowHeadPath.style.fill = this._arrowsColor;
         this._arrowHead.appendChild(this._arrowHeadPath);
         this._svg.appendChild(this._arrowHead);
         //Create paths for the started dependency array
@@ -92,7 +94,7 @@ export default class Arrow {
             "path"
           );
           somePath.setAttribute("d", "M 0 0");
-          somePath.style.stroke = "#9c0000";
+          somePath.style.stroke = this._arrowsColor;
           somePath.style.strokeWidth = "3px";
           somePath.style.fill = "none";
           somePath.style.pointerEvents = "auto";
