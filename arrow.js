@@ -31,6 +31,7 @@ export default class Arrow {
         this._timeline = timeline;
 
         this._followRelationships = options?.followRelationships;
+        this._tooltipConfig = options?.tooltipConfig;
 
         this._arrowsColor = options?.color ? options.color : "#9c0000"
 
@@ -212,7 +213,9 @@ export default class Arrow {
 
             // Adding the title if property title has been added in the dependency
             if (dep.hasOwnProperty("title")) {
-                this._dependencyPath[index].innerHTML = "<title>" +dep.title +"</title>"
+                this._tooltipConfig
+                    ? this._tooltipConfig(this._dependencyPath[index], dep.title)
+                    : this._dependencyPath[index].innerHTML = "<title>" + dep.title + "</title>";
             }
         } else {
             this._dependencyPath[index].setAttribute("marker-end", "");

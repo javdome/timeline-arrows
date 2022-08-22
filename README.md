@@ -62,7 +62,10 @@ Options can be used to customize the arrows. Options are defined as a JSON objec
 ```
 const options = {
     followRelationships: true,
-    color: "#039E00"
+    color: "#039E00",
+    tooltipConfig: (el, title) => {
+        // tooltip initialization
+    },
 };
 
 const my_Arrow = new Arrow(my_timeline, arrows_array, options);
@@ -73,6 +76,9 @@ If true, arrows can point backwards and will follow the relationships set in the
 
 **color** - defaults to "#9c0000".
 Sets the arrows color.
+
+**tooltipConfig** - if arrows have a `title` property, the default behavior will add a title attribute that shows on hover. However, you might not want to use the title attribute, but instead your own tooltip configuration.
+This method takes two arguments, `el` - the arrow - and `title` - the content of the `title` property set in the arrow data.
 
 
 ## Methods
