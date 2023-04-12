@@ -9,7 +9,7 @@ Following the issue of vis https://github.com/almende/vis/issues/1699, and thank
 
 1 - Download the package
 
-```
+```bash
 npm install timeline-arrows
 ```
 
@@ -20,8 +20,8 @@ npm install timeline-arrows
 
 For instance:
 
-```
-const my_timeline = new vis.Timeline(container, items, groups, options);
+```bash
+const myTimeline = new vis.Timeline(container, items, groups, options);
 ```
 
 
@@ -35,8 +35,8 @@ And optionally:
 
 For instance:
 
-```
-var arrows_array = [
+```javascript
+var arrowsSpecs = [
     { id: 2, id_item_1: 1, id_item_2: 2 },
     { id: 5, id_item_1: 3, id_item_2: 5, title:'Hello!!!' },
     { id: 7, id_item_1: 6, id_item_2: 7 },
@@ -48,8 +48,8 @@ var arrows_array = [
 
 For instance:
 
-```
-const my_Arrow = new Arrow(my_timeline, arrows_array);
+```javascript
+const myArrows = new Arrow(myTimeline, arrowsSpecs);
 ```
 
 That's it :)
@@ -59,7 +59,7 @@ That's it :)
 
 Options can be used to customize the arrows. Options are defined as a JSON object. All options are optional.
 
-```
+```javascript
 const options = {
     followRelationships: true,
     color: "#039E00",
@@ -68,7 +68,7 @@ const options = {
     },
 };
 
-const my_Arrow = new Arrow(my_timeline, arrows_array, options);
+const myArrows = new Arrow(myTimeline, arrowsSpecs, options);
 ```
 
 **followRelationships** - defaults to false.
@@ -77,9 +77,11 @@ If true, arrows can point backwards and will follow the relationships set in the
 **color** - defaults to "#9c0000".
 Sets the arrows color.
 
+**strokeWidth** - defaults to 3 (px).
+Sets the arrows width in pixels.
+
 **tooltipConfig** - if arrows have a `title` property, the default behavior will add a title attribute that shows on hover. However, you might not want to use the title attribute, but instead your own tooltip configuration.
 This method takes two arguments, `el` - the arrow - and `title` - the content of the `title` property set in the arrow data.
-
 
 ## Methods
 
@@ -88,29 +90,33 @@ I have created the following methods:
 **getArrow ( *arrow id* )**  Returns the arrow whith this arrow_id.
 
 For instance:
-```
-my_Arrow.getArrow (2);
+
+```javascript
+myArrow.getArrow(2);
 ```
 
 **addArrow ( *arrow object* )**  Inserts a new arrow.
 
 For instance:
-```
-my_Arrow.addArrow ( { id: 13, id_item_1: 15, id_item_2: 16 } );
+
+```javascript
+myArrow.addArrow({ id: 13, id_item_1: 15, id_item_2: 16 });
 ```
 
-**removeArrow ( *arrow_Id* )**   Removes the arrows with this arrow_Id. 
-
-For instance:
-```
-my_Arrow.removeArrow ( 10 );
-```
-
-**removeArrowbyItemId ( *item_Id* )**   Removes the arrows connected with Items with this item_Id. Returns an array with the id's of the removed arrows.
+**removeArrow ( *arrow_Id* )**   Removes the arrows with this arrow_Id.
 
 For instance:
+
+```javascript
+myArrow.removeArrow( 10 );
 ```
-my_Arrow.removeArrowbyItemId ( 23 );
+
+**removeItemArrows ( *item_Id* )**   Removes the arrows connected with Items with this item_Id. Returns an array with the id's of the removed arrows.
+
+For instance:
+
+```javascript
+myArrow.removeItemArrows( 23 );
 ```
 
 ## Examples
