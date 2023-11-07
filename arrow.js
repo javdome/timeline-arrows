@@ -4,8 +4,8 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 4.1.0
- * @date    2022-08-01
+ * @version 4.1.1
+ * @date    2023-11-07
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
  *
@@ -224,7 +224,12 @@ export default class Arrow {
     //Función que recibe in Item y devuelve la posición en pantalla del item.
     _getItemPos (item) {
         let left_x = item.left;
-        let top_y = item.parent.top + item.parent.height - item.top - item.height;
+        let top_y;
+        if (this._timeline.options.orientation.item == "top") {
+            top_y = item.parent.top + item.top;
+        } else {
+            top_y = item.parent.top + item.parent.height - item.top - item.height;
+        }
         return {
             left: left_x,
             top: top_y,

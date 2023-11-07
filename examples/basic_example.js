@@ -7,6 +7,7 @@
         groupOrder: "content", // groupOrder can be a property name or a sorting function
         selectable: true,
         editable: true,
+        // orientation: "top",
         groupTemplate: function(group) { //function to hide groups
           var container = document.createElement('div');
           var label = document.createElement('span');
