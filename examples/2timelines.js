@@ -9,12 +9,12 @@
         selectable: true,
         editable: true,
         groupTemplate: function(group) { //function to hide groups
-          var container = document.createElement('div');
-          var label = document.createElement('span');
+          const container = document.createElement('div');
+          const label = document.createElement('span');
           label.innerHTML = group.content + ' ';
           container.insertAdjacentElement('afterBegin',label);
           
-          var hide = document.createElement('span');
+          const hide = document.createElement('span');
           hide.setAttribute("class", "oi oi-eye");
           hide.addEventListener('click',function(){
             groups.update({id: group.id, visible: false});
@@ -25,23 +25,23 @@
       };
 
       // Generate some
-      var now = vis.moment()
+      const now = vis.moment()
         .minutes(0)
         .seconds(0)
         .milliseconds(0);
-      var names = ["John", "Alston", "Lee", "Grant"];
-      var itemCount = 20;
+      const names = ["John", "Alston", "Lee", "Grant"];
+      const itemCount = 20;
       // create a data set with groups
-      var groups = new vis.DataSet();
-      for (var g = 0; g < names.length; g++) {
+      const groups = new vis.DataSet();
+      for (let g = 0; g < names.length; g++) {
         groups.add({ id: g, content: names[g] });
       }
       // create a dataset with items
-      var items = new vis.DataSet();
-      for (var i = 0; i < itemCount; i++) {
-        var start = now.clone().add(Math.random() * 200, "hours");
-        var end = start + 100000000;
-        var group = Math.floor(Math.random() * names.length);
+      const items = new vis.DataSet();
+      for (let i = 0; i < itemCount; i++) {
+        const start = now.clone().add(Math.random() * 200, "hours");
+        const end = start + 100000000;
+        const group = Math.floor(Math.random() * names.length);
         items.add({
           id: i,
           group: group,
@@ -71,12 +71,12 @@
       selectable: true,
       editable: true,
       groupTemplate: function(group) { //function to hide groups
-        var container = document.createElement('div');
-        var label = document.createElement('span');
+        const container = document.createElement('div');
+        const label = document.createElement('span');
         label.innerHTML = group.content + ' ';
         container.insertAdjacentElement('afterBegin',label);
         
-        var hide = document.createElement('span');
+        const hide = document.createElement('span');
         hide.setAttribute("class", "oi oi-eye");
         hide.addEventListener('click',function(){
           groups2.update({id: group.id, visible: false});
@@ -87,23 +87,23 @@
     };
 
     // Generate some
-    var now2 = vis.moment()
+    const now2 = vis.moment()
       .minutes(0)
       .seconds(0)
       .milliseconds(0);
-    var names2 = ["Juan", "Alfredo", "Luis", "David"];
-    var itemCount2 = 20;
+    const names2 = ["Juan", "Alfredo", "Luis", "David"];
+    const itemCount2 = 20;
     // create a data set with groups
-    var groups2 = new vis.DataSet();
-    for (var g = 0; g < names2.length; g++) {
+    const groups2 = new vis.DataSet();
+    for (let g = 0; g < names2.length; g++) {
       groups2.add({ id: g, content: names2[g] });
     }
     // create a dataset with items
-    var items2 = new vis.DataSet();
-    for (var i = 0; i < itemCount2; i++) {
-      var start = now2.clone().add(Math.random() * 200, "hours");
-      var end = start + 100000000;
-      var group = Math.floor(Math.random() * names2.length);
+    const items2 = new vis.DataSet();
+    for (let i = 0; i < itemCount2; i++) {
+      const start = now2.clone().add(Math.random() * 200, "hours");
+      const end = start + 100000000;
+      const group = Math.floor(Math.random() * names2.length);
       items2.add({
         id: i,
         group: group,
@@ -134,11 +134,11 @@
         onrangechange1();
       });
       function onrangechange1() {
-        var range = timelinevis.getWindow();
+        const range = timelinevis.getWindow();
         timelinevis2.setWindow(range.start, range.end, {animation: false});
       }
       function onrangechange2() {
-        var range = timelinevis2.getWindow();
+        const range = timelinevis2.getWindow();
         timelinevis.setWindow(range.start, range.end, {animation: false});
       }
 
@@ -147,7 +147,7 @@
       /**
       *CREATING 2 ARRAYS OF ARROWS 
       */    
-      var dependency = [
+      const dependency = [
         {
           id: 2,
           id_item_1: 1,
@@ -174,7 +174,7 @@
 
 
 
-      var dependency2 = [
+      const dependency2 = [
         {
           id: 2,
           id_item_1: 1,
@@ -219,7 +219,7 @@
 
       /*ANOTHER FUNCTIONS (NO IMPORTANT)*/
       const showVisibleItems = function () {
-        var a = timelinevis.getVisibleItems();
+        const a = timelinevis.getVisibleItems();
         document.getElementById("visibleItemsContainer").innerHTML = ""
         document.getElementById("visibleItemsContainer").innerHTML += a;
       };
