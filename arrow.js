@@ -4,8 +4,8 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 4.1.1
- * @date    2023-11-07
+ * @version 4.3.1
+ * @date    2024-01-16
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
  *
@@ -90,6 +90,9 @@ export default class Arrow {
         /** @private @type {SVGPathElement[]} */
         this._dependencyPath = [];
 
+        /** @private @type {string} */
+        this._arrowHeadId = `arrowhead-${Math.random().toString(36).substring(2)}`;
+
         this._initialize();
     }
   
@@ -105,7 +108,7 @@ export default class Arrow {
         this._timeline.dom.center.appendChild(this._svg);
 
         //Configure the arrowHead
-        this._arrowHead.setAttribute("id", "arrowhead0");
+        this._arrowHead.setAttribute("id", this._arrowHeadId);
         this._arrowHead.setAttribute("viewBox", "-10 -5 10 10");
         this._arrowHead.setAttribute("refX", "-7");
         this._arrowHead.setAttribute("refY", "0");
@@ -209,7 +212,7 @@ export default class Arrow {
 
             if (this._followRelationships && item_2.mid_x < item_1.mid_x) {
                 item_2.right += 10; // Space for the arrowhead.
-                this._dependencyPath[index].setAttribute("marker-start", "url(#arrowhead0)");
+                this._dependencyPath[index].setAttribute("marker-start", `url(#${this._arrowHeadId})`);
                 this._dependencyPath[index].setAttribute("marker-end", "");
                 this._dependencyPath[index].setAttribute(
                     "d",
@@ -232,7 +235,7 @@ export default class Arrow {
                 );
             } else {
                 item_2.left -= 10; // Space for the arrowhead.
-                this._dependencyPath[index].setAttribute("marker-end", "url(#arrowhead0)");
+                this._dependencyPath[index].setAttribute("marker-end", `url(#${this._arrowHeadId})`);
                 this._dependencyPath[index].setAttribute("marker-start", "");
                 this._dependencyPath[index].setAttribute(
                     "d",

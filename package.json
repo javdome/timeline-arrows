@@ -1,6 +1,6 @@
 {
   "name": "timeline-arrows",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "description": "Package to easily draw lines to connect items in the vis Timeline module.",
   "main": "arrow.js",
   "types": "arrow.d.ts",
