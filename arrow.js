@@ -4,8 +4,8 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 4.3.1
- * @date    2024-01-16
+ * @version 4.3.2
+ * @date    2024-01-17
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
  *
@@ -85,7 +85,7 @@ export default class Arrow {
             "path"
         );
         
-        this._dependency = dependencies;
+        this._dependency = [...dependencies];
 
         /** @private @type {SVGPathElement[]} */
         this._dependencyPath = [];
@@ -171,6 +171,9 @@ export default class Arrow {
         
         //Checks if at least one item is visible in screen
         let oneItemVisible = false; //Iniciamos a false
+        //Checks if the groups of items are both visible
+        let groupOf_1_isVisible = false; //Iniciamos a false
+        let groupOf_2_isVisible = false; //Iniciamos a false
         if (bothItemsExist) {    
             const visibleItems = this._timeline.getVisibleItems();
             for (let k = 0; k < visibleItems.length ; k++) {
@@ -178,9 +181,7 @@ export default class Arrow {
                 if (dep.id_item_2 == visibleItems[k]) oneItemVisible = true;
             }
         
-            //Checks if the groups of items are both visible
-            var groupOf_1_isVisible = false; //Iniciamos a false
-            var groupOf_2_isVisible = false; //Iniciamos a false
+            
             
             let groupOf_1 = this._timeline.itemsData.get(dep.id_item_1).group; //let groupOf_1 = items.get(dep.id_item_1).group;
             
@@ -193,10 +194,10 @@ export default class Arrow {
 
             // If groups are null then they are not visible.
             if (groupOf_1 == null){
-                var groupOf_1_isVisible = false;
+                groupOf_1_isVisible = false;
             }
             if (groupOf_2 == null){
-                var groupOf_2_isVisible = false;
+                groupOf_2_isVisible = false;
             }
         }
 
@@ -327,8 +328,9 @@ export default class Arrow {
 
             this._dependency.splice(index, 1); //Elimino del array dependency
             this._dependencyPath.splice(index, 1); //Elimino del array dependencyPath
-        
-            list[index + 1].parentNode.removeChild(list[index + 1]); //Lo elimino del dom
+            
+            list[index + 1].parentNode?.removeChild(list[index + 1]); //Lo elimino del dom
+            
         }
     }
 
