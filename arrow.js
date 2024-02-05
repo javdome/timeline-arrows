@@ -4,8 +4,8 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 4.3.2
- * @date    2024-01-17
+ * @version 4.4.0
+ * @date    2024-02-3
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
  *
@@ -351,6 +351,23 @@ export default class Arrow {
         }
         return listOfRemovedArrows;
     }
+
+    /**
+     * Removes the arrows between item 1 and item 2.
+     * @param {VisIdType} itemId1 item id
+     * @param {VisIdType} itemId2 item id
+     * @returns {(ArrowIdType)[]} id of the removed arrow 
+     */
+    removeArrowsBetweenItems(itemId1, itemId2) {
+        let listOfRemovedArrows = [];
+        let ArrowsToDelete = this._dependency.filter(dep => (dep.id_item_1 == itemId1 && dep.id_item_2 == itemId2) )
+        ArrowsToDelete.forEach(dep => {
+            listOfRemovedArrows.push(dep.id);
+            this.removeArrow(dep.id)
+        })
+        return listOfRemovedArrows
+    }
+    
 
     /**
      * For backward compatibility

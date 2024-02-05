@@ -119,6 +119,14 @@ For instance:
 myArrow.removeItemArrows( 23 );
 ```
 
+**removeArrowsBetweenItems (*itemId1, itemId2*)**  Removes the arrows between item 1 and item 2.
+
+For instance:
+
+```javascript
+myArrow.removeArrowsBetweenItems( 3, 8);
+```
+
 ## Examples
 
 You can see some working examples here:
