@@ -95,6 +95,14 @@ For instance:
 myArrow.getArrow(2);
 ```
 
+**getIdArrows ()** Returns the list of Id arrows
+
+For instance:
+
+```javascript
+myArrow.getIdArrows();
+```
+
 **addArrow ( *arrow object* )**  Inserts a new arrow.
 
 For instance:

@@ -4,7 +4,7 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 4.4.0
+ * @version 4.5.0
  * @date    2024-02-3
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
@@ -311,6 +311,16 @@ export default class Arrow {
      */
     getArrow(id) {
         return this._dependency.find(dep => dep.id === id) ?? null;
+    }
+
+
+    /**
+     * Get all Id arrows.
+     *
+     * @return {(ArrowIdType)[]} list of id arrows
+     */
+    getIdArrows() {
+        return this._dependency.map(dep => dep.id);
     }
     
     /**
