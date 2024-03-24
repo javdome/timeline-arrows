@@ -4,8 +4,8 @@
  *
  * Class to easily draw lines to connect items in the vis Timeline module.
  *
- * @version 4.5.0
- * @date    2024-02-3
+ * @version 4.6.0
+ * @date    2024-03-24
  *
  * @copyright (c) Javi Domenech (javdome@gmail.com) 
  *
@@ -49,6 +49,7 @@
         This method takes two arguments, `el` - the arrow - and `title` - the content of the `title` property set in the arrow data.
  * @property {string} [color] arrow color
  * @property {number} [strokeWidth] arrow thickness in pixels
+ * @property {boolean} [hideWhenItemsNotVisible] if true, arrows will be hidden when both items is not visible due to timeline zoom.
  */
 
 /** Arrow set for a vis.js Timeline. */
@@ -73,6 +74,9 @@ export default class Arrow {
         this._arrowsColor = options?.color ? options.color : "#9c0000"
         /** @private @type {number} arrow thickness in pixels */
         this._arrowsStrokeWidth = options?.strokeWidth ?? 3;
+
+        /** @private @type {boolean} if true, arrows will be hidden when both items is not visible due to timeline zoom  */
+        this._hideWhenItemsNotVisible = options?.hideWhenItemsNotVisible ?? true;
 
         /** @private @type {SVGMarkerElement} */
         this._arrowHead = document.createElementNS(
@@ -166,7 +170,7 @@ export default class Arrow {
     _drawArrows(dep, index) {
         //Checks if both items exist
         //if( (typeof this._timeline.itemsData._data[dep.id_item_1] !== "undefined") && (typeof this._timeline.itemsData._data[dep.id_item_2] !== "undefined") ) {
-        //debugger;
+
         const bothItemsExist = (this._timeline.itemsData.get(dep.id_item_1) !== null) && (this._timeline.itemsData.get(dep.id_item_2) !== null);
         
         //Checks if at least one item is visible in screen
@@ -201,7 +205,7 @@ export default class Arrow {
             }
         }
 
-        if ( (groupOf_1_isVisible && groupOf_2_isVisible) && (oneItemVisible) && (bothItemsExist)) {
+        if ( (groupOf_1_isVisible && groupOf_2_isVisible) && (oneItemVisible || !this._hideWhenItemsNotVisible) && (bothItemsExist)) {
             var item_1 = this._getItemPos(this._timeline.itemSet.items[dep.id_item_1]);
             var item_2 = this._getItemPos(this._timeline.itemSet.items[dep.id_item_2]);
 

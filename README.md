@@ -83,6 +83,9 @@ Sets the arrows width in pixels.
 **tooltipConfig** - if arrows have a `title` property, the default behavior will add a title attribute that shows on hover. However, you might not want to use the title attribute, but instead your own tooltip configuration.
 This method takes two arguments, `el` - the arrow - and `title` - the content of the `title` property set in the arrow data.
 
+**hideWhenItemsNotVisible** - defaults to `true`.
+When you zoom the timeline and both items go out of the screen. You can set if the arrow is still visible. By default, the arrow hides, but you can change it setting this option to `false`.
+
 ## Methods
 
 I have created the following methods:
