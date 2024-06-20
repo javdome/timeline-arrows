@@ -326,6 +326,16 @@ export default class Arrow {
     getIdArrows() {
         return this._dependency.map(dep => dep.id);
     }
+
+    //remove all arrows from timeline
+    clearArrows () {
+        const list = document.querySelectorAll("#" +this._timeline.dom.container.id +" path");
+        for(const index in this._dependency){
+            list[index + 1].parentNode.removeChild(list[index + 1]); //Remove each dep from dom
+        }
+        this._dependency = []; //clear dependency from array
+        this._dependencyPath = []; //clear dependencyPath from array
+    }
     
     /**
      * Finds arrow with the given id and removes it.
