@@ -2,7 +2,7 @@
 
 Following the issue of vis https://github.com/almende/vis/issues/1699, and thanks to the comments of @frboyer and @JimmyCheng, I have created a class to easily draw lines to connect items in the vis Timeline module.
 
-![CapturaTime](https://github.com/user-attachments/assets/a8b85ee1-d147-407e-8132-d749804362f3)
+![CapturaTime](https://github.com/user-attachments/assets/50cb09bc-00d8-4afa-9779-76f5515a898c)
 
 
 ## Install & initialize
@@ -99,14 +99,22 @@ Example: `color: '#ff0000'`
 **direction** - Optional. Controls arrow direction. Defaults to `1`.
 
 * `0` = No arrows (simple line connection)
-* `1` = Forward arrow only (from item_1 to item_2)
-* `2` = Backward arrow only (from item_2 to item_1)
-* `3` = Both directions (arrows on both ends)
+* `1` = Arrow always at the second event (`id_item_2`)
+* `2` = Arrow always at the first event (`id_item_1`)
+* `3` = Arrows on both ends
 
 **line** - Optional. Controls line style. Defaults to `0`.
 
 * `0` = Solid line (default)
 * `1` = Dashed line
+
+**type** - Optional. Controls the shape of the line. Defaults to `0`.
+
+* `0` = Bezier (default, smooth curve)
+* `1` = Straight line (center to center)
+* `2` = Cornered line (2 or 4 bends, attaches to the side of events)
+
+**align** - Optional. If set to `'center'`, the line is straight and connects the centers of events (used with type 1).
 
 **title** - Optional. Text that appears on hover.
 
@@ -119,8 +127,10 @@ Example with all properties:
     id_item_2: 8, 
     title: 'Custom arrow', 
     color: '#00ff00', 
-    direction: 3, 
-    line: 1 
+    direction: 1, // arrow always at id_item_2
+    line: 1,      // dashed
+    type: 2,      // cornered
+    align: 'center' // straight center-to-center (if type: 1)
 }
 ```
 
