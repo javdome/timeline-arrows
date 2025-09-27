@@ -299,7 +299,7 @@ export default class Arrow {
                 const x2 = item_2.mid_x;
                 const y2 = item_2.mid_y;
 
-                function getRectIntersection(rect, x0, y0, x1, y1, offset = 0) {
+                const getRectIntersection = (rect, x0, y0, x1, y1, offset = 0) => {
                     // Direction vector
                     const dx = x1 - x0;
                     const dy = y1 - y0;
@@ -396,7 +396,7 @@ export default class Arrow {
                 const x2 = item_2.mid_x;
                 const y2 = item_2.mid_y;
 
-                function getRectIntersection(rect, x0, y0, x1, y1, offset = 0) {
+                const getRectIntersection = (rect, x0, y0, x1, y1, offset = 0) => {
                     // Direction vector
                     const dx = x1 - x0;
                     const dy = y1 - y0;
